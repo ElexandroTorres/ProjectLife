@@ -6,7 +6,41 @@
 
 #IncludeRegexTransform: 
 
-/home/elexandro/Documentos/Projetos/life/Life/include/life.h
+../include/canvas.h
+iostream
+-
+vector
+-
+cstring
+-
+common.h
+../include/common.h
+lodepng.h
+../include/lodepng.h
+
+../include/common.h
+cstring
+-
+iostream
+-
+map
+-
+
+../include/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+../include/lodepng.h
+iostream
+-
+lodepng.h
+../include/lodepng.h
+
+/home/elexandro/Documentos/ProjectLife/include/life.h
 iostream
 -
 string
@@ -17,8 +51,10 @@ vector
 -
 stdio.h
 -
+canvas.h
+-
 
-/home/elexandro/Documentos/Projetos/life/Life/src/main.cpp
+/home/elexandro/Documentos/ProjectLife/src/main.cpp
 ../include/life.h
-/home/elexandro/Documentos/Projetos/life/Life/include/life.h
+/home/elexandro/Documentos/ProjectLife/include/life.h
 

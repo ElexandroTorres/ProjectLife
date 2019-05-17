@@ -1,1 +1,1 @@
-/usr/bin/c++   -Wall   CMakeFiles/glife.dir/src/main.cpp.o  -o glife 
+/usr/bin/c++   -Wall   CMakeFiles/glife.dir/src/lodepng.cpp.o CMakeFiles/glife.dir/src/main.cpp.o  -o glife 

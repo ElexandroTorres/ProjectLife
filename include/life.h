@@ -7,6 +7,8 @@
 #include <vector>
 #include <stdio.h>
 
+#include <canvas.h>
+
 //definição de uma celula.
 class Cell {
 	private:
@@ -17,6 +19,11 @@ class Cell {
 			c_alive = alive;
 			c_numberOfNeighbors = 0;
 		}
+		Cell(const Cell &clone) {
+          c_alive = clone.c_alive;
+          c_numberOfNeighbors = clone.c_numberOfNeighbors;
+        }
+		~Cell() = default;
 
 		void set_state(bool state) {
 			c_alive = state;
@@ -42,7 +49,6 @@ class Cell {
 		short neighbors() {
 			return c_numberOfNeighbors;
 		}
-
 };
 
 
@@ -58,23 +64,35 @@ class Life {
 		int m_width;
 		char m_vivo;
 
-		int numVivos;
 
 		std::vector<Cell> cells;
-		std::vector<int> liveCells; //vetor que ira guardar a posição da celula viva.
+		std::vector<life::Coordenada> liveCells; //vetor que ira guardar a posição da celula viva.
 		std::vector<Cell> cellsCopy;
 
 	public:
 		//Construtor padrão.
 		Life(int argc, const char *argv[]) {
 			m_argc = argc;
-			m_argv.resize(argc);
-			
+			m_argv.resize(argc);		
 			for(int i = 0; i < m_argc; i++) {
 				m_argv[i] = argv[i];
 			}
 		}
+
+		~Life() = default;
 		
+		// Example 1
+		// Encode from raw pixels to disk with a single function call
+		// The image argument has width * height RGBA pixels or width * height * 4 bytes
+		void encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
+
+    		//Encode the image
+    		unsigned error = lodepng::encode(filename, image, width, height);
+
+    		//if there's an error, display it
+    		if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+		}
+
 		//Mostra a matriz, caso seja possivel.
 		void print() {
 			std::cout << "Impressão da matriz: \n\n";
@@ -100,10 +118,11 @@ class Life {
 			
 			cells.resize(m_height*m_width);//
 			cellsCopy.resize(m_height*m_width);
-			
+			//teste criar imagem.
+
 			int j = 0;
 			while(arquivo >> m_line and j < m_height) {
-				for(int i = 0; i < m_line.size(); i++) {
+				for(auto i = 0u; i < m_line.size(); i++) {
 					// Apenas os caracteres que representam as celulas vivas serão incluidos.
 					if(m_line[i] == m_vivo) { 
 						cells[i + m_width * j].set_state(true);	
@@ -115,15 +134,6 @@ class Life {
 				j++;
 			}
 
-			std::cout << "Mostrar vector de celulas: \n";
-			for(int j = 0; j < m_height; j++) {
-				for(int i = 0; i < m_width; i++) {
-					std::cout << cells[i + m_width * j].is_alive() << " ";
-				}
-				std::cout << " |\n";
-			}
-			//print();
-			
 		}
 		
 
@@ -186,6 +196,7 @@ class Life {
 
 			}
 			
+			
 			//deletar o vetor dinmaico criado aqui ao inves de no desconstrutor.
 			return true;
 		}
@@ -204,8 +215,6 @@ class Life {
 
 		short checarVizinhos(int i, int j) {
 			short qntVizinhos = 0;
-
-
 			//vizinhos de itens nas bordas.
 			//siginifica que esta na borda.
 			/*
@@ -311,7 +320,7 @@ class Life {
 			for(int j = 0; j < m_height; j++) {
 				for(int i = 0; i < m_width; i++) {
 					if(cells[i + m_width * j].is_alive()) { //se a cellula estiver viva, salvar a posição dela.
-						liveCells.push_back(i + m_width * j);
+						liveCells.push_back(life::Coordenada(j, i));
 					}
 				}
 			}
@@ -322,13 +331,13 @@ class Life {
 			std::fstream teste;
 			//caso seja  a primera geração. criar um arquivo apenas como modo de escrita.
 			if(numge == 1) {
-				teste.open("saida.txt", std::fstream::out | std::fstream::trunc);
+				teste.open("saida.txt", std::fstream::out /*std::fstream::trunc*/);
 			}
 			else {
 				teste.open("saida.txt", std::fstream::app);	
 			}
 			teste << numge << " " << liveCells.size() << " ";
-			for(int i = 0; i < liveCells.size(); i++) {
+			for(auto i = 0u; i < liveCells.size(); i++) {
 				teste << liveCells[i] << " ";	
 			}
 			teste << "\n";
@@ -342,7 +351,7 @@ class Life {
 
 		void process_simulation() {
 			int x = 1;
-			while(x < 7) {
+			while(x < 10) {
 				updateLiveCells(cells);
 				//copiar a imagem atual para a copia.
 				vetorVivos(x);
@@ -352,14 +361,15 @@ class Life {
 				
 
 				//checar a quantidade de vivos.
-				std::cout << "Numero de celulas vivas: " << liveCells.size() << "\n";
+				//std::cout << "Numero de celulas vivas: " << liveCells.size() << "\n";
 				//vetorVivos(x);
+				/*
 				std::cout << "celulas vivas: \n";
 				for(int i = 0; i < liveCells.size(); i++) {
 					std::cout << liveCells[i] << " ";
 				}
 				std::cout << "\n";
-				
+				*/
 				
 				//Contar a quantidade de vizinhos de cada celula.
 				for(int j = 0; j < m_height; j++) { //começar de 0, 1 é teste.
@@ -377,7 +387,7 @@ class Life {
 						if(not cells[i +m_width*j].is_alive() and cells[i +m_width*j].neighbors() == 3) {
 							cellsCopy[i +m_width*j].born();
 						}
-						if(cells[i +m_width*j].is_alive() and (cells[i +m_width*j].neighbors() < 2 or cells[i +m_width*j].neighbors() > 3)) {
+						else if(cells[i +m_width*j].is_alive() and (cells[i +m_width*j].neighbors() < 2 or cells[i +m_width*j].neighbors() > 3)) {
 							cellsCopy[i +m_width*j].kill();
 						}
 					}
@@ -387,20 +397,45 @@ class Life {
 				cells = cellsCopy;
 
 				//print();
-				x++;
-			}
+				
+				
+				std::string filename;
+				filename = "Generation " + std::to_string(x);
+				
+				Canvas img( m_width, m_height, 100);
+			//pintar todos os pixels, teste.
+				//descobrir valor da coluna.
+				for(auto i = 0u; i < liveCells.size(); i++) {
+					//std::cout << "valores das coordenadas: \n";
+					//std::cout << "X: " << liveCells[i].get_x() << " Y: " << liveCells[i].get_y() << "\n"; 
+					img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
+					
+
+				}
+					encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height() );	
 			
+
+	    		x++;
+	    		
+			}
+			std::cerr << "CHEGOUA AKI!!\n";
 
 			//remove("saida.txt");
 			//gerar as imagens, ou arquivos de texto ou console.
 		}
+
+		
 
 
 
 		//caso a simulação termine.
 		bool end_simulation() {
 			process_simulation(); //porenquanto
-
+			//teste
+			//Canvas img( 50, 50, 30);
+    		//largura x altura...
+    		
+			std::cerr << "CHEOGU AKI TBM\n";
 			return true;
 			//verificar se é estavel.
 			//verificar se é extinta;

@@ -1,5 +1,8 @@
 #include "../include/life.h"
 
+
+
+
 int main(int argc, const char *argv[]) {
 
 	
@@ -14,13 +17,7 @@ int main(int argc, const char *argv[]) {
 	while(!life.end_simulation()) {
 		life.process_simulation();
 	}
-
-	Cell l;
-
-	std::cout << "tamanho do objeto celula: " << sizeof(l) << "\n";
-
-
-
+	std::cout << "CHGOU AKI!!\n";
 
 	return 0;
 }

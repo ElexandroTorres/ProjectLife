@@ -6,5 +6,5 @@ CXX_FLAGS =  -Wall   -std=gnu++14
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/elexandro/Documentos/Projetos/life/Life/include 
+CXX_INCLUDES = -I/home/elexandro/Documentos/ProjectLife/include 
 

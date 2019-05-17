@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/elexandro/Documentos/Projetos/life/Life
+CMAKE_SOURCE_DIR = /home/elexandro/Documentos/ProjectLife
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/elexandro/Documentos/Projetos/life/Life/build
+CMAKE_BINARY_DIR = /home/elexandro/Documentos/ProjectLife/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elexandro/Documentos/Projetos/life/Life/build/CMakeFiles /home/elexandro/Documentos/Projetos/life/Life/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elexandro/Documentos/ProjectLife/build/CMakeFiles /home/elexandro/Documentos/ProjectLife/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/elexandro/Documentos/Projetos/life/Life/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/elexandro/Documentos/ProjectLife/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ glife/fast:
 	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/build
 .PHONY : glife/fast
 
+src/lodepng.o: src/lodepng.cpp.o
+
+.PHONY : src/lodepng.o
+
+# target to build an object file
+src/lodepng.cpp.o:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/lodepng.cpp.o
+.PHONY : src/lodepng.cpp.o
+
+src/lodepng.i: src/lodepng.cpp.i
+
+.PHONY : src/lodepng.i
+
+# target to preprocess a source file
+src/lodepng.cpp.i:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/lodepng.cpp.i
+.PHONY : src/lodepng.cpp.i
+
+src/lodepng.s: src/lodepng.cpp.s
+
+.PHONY : src/lodepng.s
+
+# target to generate assembly for a file
+src/lodepng.cpp.s:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/lodepng.cpp.s
+.PHONY : src/lodepng.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... glife"
 	@echo "... edit_cache"
+	@echo "... src/lodepng.o"
+	@echo "... src/lodepng.i"
+	@echo "... src/lodepng.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

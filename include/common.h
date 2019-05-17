@@ -24,13 +24,22 @@ namespace life {
           m_x = clone.m_x;
           m_y = clone.m_y;
         }
+
+        ~Coordenada() = default;
+
+        coord_type get_x() {
+          return m_x;
+        }
+        coord_type get_y() {
+          return m_y;
+        }
         /// Equality comparison.
         bool operator==(const Coordenada& rhs) const {
-          return m_x == rhs.m_x and y == rhs.m_y; 
+          return m_x == rhs.m_x and m_y == rhs.m_y; 
         }
         /// Difference comparison.
         bool operator!=( const Coordenada& rhs ) const {
-          return m_x != rhs.m_x or y != rhs.m_y; //Caso uma seja diferente, a coordenada é diferente.
+          return m_x != rhs.m_x or m_y != rhs.m_y; //Caso uma seja diferente, a coordenada é diferente.
           //return not operator==( rhs );
         }
          /// Decrement the point.
@@ -40,12 +49,12 @@ namespace life {
         }
         Coordenada operator--(int) {
           Coordenada temp(*this);
-          x--; y--;
+          m_x--; m_y--;
           return temp;
         }
          /// Stream extractor
         friend std::ostream& operator<<( std::ostream& os, const Coordenada& p) {
-          os << "(x="<< p.x << ", y=" << p.y << ")";
+          os << "(x="<< p.m_x << ", y=" << p.m_y << ")";
           return os;
         }
    };
