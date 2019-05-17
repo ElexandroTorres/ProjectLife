@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/elexandro/Documentos/Projetos/life/Life/include/life.h
+iostream
+-
+string
+-
+fstream
+-
+vector
+-
+stdio.h
+-
+
+/home/elexandro/Documentos/Projetos/life/Life/src/main.cpp
+../include/life.h
+/home/elexandro/Documentos/Projetos/life/Life/include/life.h
+
