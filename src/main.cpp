@@ -15,7 +15,7 @@ int main(int argc, const char *argv[]) {
 	}
 
 	while(!life.end_simulation()) {
-		life.process_simulation();
+		//life.process_simulation();
 	}
 
 	return 0;

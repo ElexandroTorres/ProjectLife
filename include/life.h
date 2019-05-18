@@ -52,7 +52,6 @@ class Cell {
 };
 
 
-
 class Life {
 
 	private:
@@ -86,10 +85,8 @@ class Life {
 		// Encode from raw pixels to disk with a single function call
 		// The image argument has width * height RGBA pixels or width * height * 4 bytes
 		void encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
-
     		//Encode the image
     		unsigned error = lodepng::encode(filename, image, width, height);
-
     		//if there's an error, display it
     		if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 		}
@@ -222,7 +219,6 @@ class Life {
 			short qntVizinhos = 0;
 			//vizinhos de itens nas bordas.
 			//siginifica que esta na borda.
-			// or i+1 >= m_width or j+1 >= m_width or j-1 < 0)
 			if(not(i-1 < 0)) {
 				if(not(j-1 < 0)) {
 					if(cells[(i-1) + m_width*(j-1)].is_alive()) {
@@ -266,93 +262,6 @@ class Life {
 				}	
 			}
 			
-			/*
-			if(i == m_height-1 or i == 0 or j == 0 or j == m_width-1) {
-				if(i == 0 and j == 0) {
-					if(image[i + m_width*(j+1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i+1) + m_width*j] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i+1) + m_width*(j+1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					return qntVizinhos;	
-				}
-				//
-				if(i == 0 and j == m_width-1) {
-					if(image[i + m_width*(j+1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i-1) + m_width*j] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i-1) + m_width*(j+1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					return qntVizinhos;	
-				}
-				//
-				if(i == m_height-1 and j == 0) {
-					if(image[i + m_width*(j-1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i-1) + m_width*j] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i-1) + m_width*(j-1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					return qntVizinhos;	
-				}
-				if(i == m_height-1 and j == m_width-1) {
-					if(image[i + m_width*(j-1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i-1) + m_width*j] == m_vivo) {
-						qntVizinhos++;
-					}
-					if(image[(i+1) + m_width*(j+1)] == m_vivo) {
-						qntVizinhos++;
-					}
-					return qntVizinhos;	
-				}
-			}
-	*/
-			//caso esteja nas laterais.
-
-					
-
-				
-			
-			//casos especiais.
-			//celula nos cantos diagonais.
-			//i = 0; j = 0;
-			//ANTES FAZER O BASICO.
-			/*
-			if(cells[(i-1) + m_width*(j-1)].is_alive()) {
-				qntVizinhos++;
-			}
-			if(cells[(i-1) + m_width*j].is_alive()) {
-				qntVizinhos++;
-			}
-			if(cells[(i-1) + m_width*(j+1)].is_alive()) {
-				qntVizinhos++;
-			}
-			*/
-			
-			/*
-			if(cells[(i+1) + m_width*(j-1)].is_alive()) {
-				qntVizinhos++;
-			}
-			if(cells[(i+1) + m_width*j].is_alive()) {
-				qntVizinhos++;
-			}
-			if(cells[(i+1) + m_width*(j+1)].is_alive()) {
-				qntVizinhos++;
-			}
-			*/
 			return qntVizinhos;
 
 		}
@@ -383,9 +292,9 @@ class Life {
 			else {
 				teste.open("saida.txt", std::fstream::app);	
 			}
-			teste << numge << " " << liveCells.size() << " ";
+			teste << numge << " " << liveCells.size();
 			for(auto i = 0u; i < liveCells.size(); i++) {
-				teste << liveCells[i] << " ";	
+				teste << " " << liveCells[i];	
 			}
 			teste << "\n";
 			
@@ -397,97 +306,94 @@ class Life {
 		//sabendo o numero de celulas vivas, vamos declarar
 
 		void process_simulation() {
-			//int x = 1;
-			//while(x < 10) {
-				updateLiveCells(cells);
-				//copiar a imagem atual para a copia.
-				vetorVivos(m_xx);
-				cellsCopy = cells;
-				
-				
-				
-
-				//checar a quantidade de vivos.
-				//std::cout << "Numero de celulas vivas: " << liveCells.size() << "\n";
-				//vetorVivos(x);
-				
-				std::cout << "celulas vivas: \n";
-				for(int i = 0; i < liveCells.size(); i++) {
-					std::cout << liveCells[i] << " ";
-				}
-				std::cout << "\n";
-				
-				
-				//Contar a quantidade de vizinhos de cada celula.
-				for(int j = 0; j < m_height; j++) { //começar de 0, 1 é teste.
-					for(int i = 0; i < m_width; i++) { //começar de 0, 1 é teste, ir até m_width, por enquanto é teste.
-						cells[i + m_width*j].set_neighbors(checarVizinhos(i, j)); //tetorna a quantidade de vizinhos desta celula.
-					}
-				}
-
-
-				//procurar quem tem exatamente 3 vizinhos para viver.
-				//sobrevive se tem 2 ou 3.
-				//e morre caso contrario.
-				for(int j = 0; j < m_height; j++) {
-					for(int i  = 0; i < m_width; i++) {
-						if(not cells[i +m_width*j].is_alive() and cells[i +m_width*j].neighbors() == 3) {
-							cellsCopy[i +m_width*j].born();
-						}
-						else if(cells[i +m_width*j].is_alive() and (cells[i +m_width*j].neighbors() < 2 or cells[i +m_width*j].neighbors() > 3)) {
-							cellsCopy[i +m_width*j].kill();
-						}
-					}
-				}
-
-					
-				cells = cellsCopy;
-
-				print();
-				
-				
-				
-				std::string filename;
-				filename = "Generation " + std::to_string(m_xx);
-				
-				Canvas img( m_width, m_height, 10);
-			//pintar todos os pixels, teste.
-				//descobrir valor da coluna.
-				for(auto i = 0u; i < liveCells.size(); i++) {
-					//std::cout << "valores das coordenadas: \n";
-					//std::cout << "X: " << liveCells[i].get_x() << " Y: " << liveCells[i].get_y() << "\n"; 
-					img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
-					
-
-				}
-					encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height() );	
 			
+			updateLiveCells(cells); //verifica quais celulas estão vivas.
+			
+			vetorVivos(m_xx); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
+			
+			cellsCopy = cells;
 				
-	    		//x++;
-	    		
-			//}
-			std::cerr << "CHEGOUA AKI!!\n";
+			//Contar a quantidade de vizinhos de cada celula.
+			for(int j = 0; j < m_height; j++) { //começar de 0, 1 é teste.
+				for(int i = 0; i < m_width; i++) { //começar de 0, 1 é teste, ir até m_width, por enquanto é teste.
+					cells[i + m_width*j].set_neighbors(checarVizinhos(i, j)); //tetorna a quantidade de vizinhos desta celula.
+				}
+			}
 
-			//remove("saida.txt");
-			//gerar as imagens, ou arquivos de texto ou console.
-		}
+			//procurar quem tem exatamente 3 vizinhos para viver.
+			//sobrevive se tem 2 ou 3.
+			//e morre caso contrario.
+			for(int j = 0; j < m_height; j++) {
+				for(int i  = 0; i < m_width; i++) {
+					if(not cells[i +m_width*j].is_alive() and cells[i +m_width*j].neighbors() == 3) {
+						cellsCopy[i +m_width*j].born();
+					}
+					else if(cells[i +m_width*j].is_alive() and (cells[i +m_width*j].neighbors() < 2 or cells[i +m_width*j].neighbors() > 3)) {
+						cellsCopy[i +m_width*j].kill();
+					}
+				}
+			}
 
+			cells = cellsCopy;
+			//fazer função para gravar a iamgem.					
+			std::string filename;
+			filename = "Generation " + std::to_string(m_xx);
+				
+			Canvas img( m_width, m_height, 10);
+			//pintar todos os pixels, teste.
+			//descobrir valor da coluna.
+			for(auto i = 0u; i < liveCells.size(); i++) {
+				//std::cout << "valores das coordenadas: \n";
+				//std::cout << "X: " << liveCells[i].get_x() << " Y: " << liveCells[i].get_y() << "\n"; 
+				img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
+			}
+			encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
 		
+		}
+		
+		bool is_stable() {
+			std::fstream saida("saida.txt", std::fstream::in);
+			int geracao;
+			int quant;
+			int dados;
+			if(saida.is_open()) { //caso o arquivo exista...
+				//enquanto tiver linhas para serem lidas.
+				//while(saida >> m_line) {
+				while(saida >> geracao) {
+					saida >> quant;
+					std::cout << "Geração atual: " << geracao << "\n";
+					std::cout << "Quantidade de celulas: " << quant << "\n";
+					std::cout << "Celulas: ";
+					for(int i = 0; i < quant*2; i++) {
+						saida >> dados;
+						//pegar os dados e colocar em um vetor, e fazer uma comparação entre ambos.
+						std::cout << dados << " ";
+					}
+					std::cout << "\n";
+				
+				
+				}
 
-
+				saida.close();
+			}
+		}
+		
 
 		//caso a simulação termine.
 		bool end_simulation() {
-			while(m_xx < 100) {
-
+			//while(m_xx <= 3) {
+			if(m_xx <= 3) {
+				print();
 				process_simulation(); //porenquanto
-				print(); //mostrar a imagem.
+
+				//checar estabilidade.
+				if(is_stable()) {
+
+				}
 				m_xx++;	
+				return false; //simulação não terminou.
+				
 			}
-			
-			//teste
-			//Canvas img( 50, 50, 30);
-    		//largura x altura...
     		
 			return true;
 			//verificar se é estavel.

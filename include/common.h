@@ -54,7 +54,7 @@ namespace life {
         }
          /// Stream extractor
         friend std::ostream& operator<<( std::ostream& os, const Coordenada& p) {
-          os << "(x="<< p.m_x << ", y=" << p.m_y << ")";
+          os << p.m_x << " " << p.m_y;
           return os;
         }
    };
