@@ -17,7 +17,6 @@ int main(int argc, const char *argv[]) {
 	while(!life.end_simulation()) {
 		life.process_simulation();
 	}
-	std::cout << "CHGOU AKI!!\n";
 
 	return 0;
 }

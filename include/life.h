@@ -64,6 +64,7 @@ class Life {
 		int m_width;
 		char m_vivo;
 
+		int m_xx = 1;
 
 		std::vector<Cell> cells;
 		std::vector<life::Coordenada> liveCells; //vetor que ira guardar a posição da celula viva.
@@ -123,12 +124,14 @@ class Life {
 			int j = 0;
 			while(arquivo >> m_line and j < m_height) {
 				for(auto i = 0u; i < m_line.size(); i++) {
-					// Apenas os caracteres que representam as celulas vivas serão incluidos.
-					if(m_line[i] == m_vivo) { 
-						cells[i + m_width * j].set_state(true);	
-					}
-					else{
-						cells[i + m_width * j].set_state(false);
+					if(i < m_width) {
+						// Apenas os caracteres que representam as celulas vivas serão incluidos.
+						if(m_line[i] == m_vivo) { 
+							cells[i + m_width * j].set_state(true);	
+						}
+						else{
+							cells[i + m_width * j].set_state(false);
+						}	
 					}
 				}
 				j++;
@@ -167,6 +170,7 @@ class Life {
 
 				return false;
 			}
+			
 			//COnsiderar que o primeiro argumento de configuração vai ser o nome do arquivo.
 			std::fstream arquivo(m_argv[1]);
 			if(arquivo.is_open()) { //caso o arquivo exista...
@@ -176,7 +180,8 @@ class Life {
 			else {
 				std::cout << "arquivo informado não existe!\n";
 			}
-			
+
+			/*
 			//varrer todo o vetor de argumentos.
 			for(int i = 2; i < m_argc; i++) {
 				if(m_argv[i] == "--imgdir") {
@@ -193,9 +198,9 @@ class Life {
 				if(m_argv[i] == "--blocksize") {
 					int m_blocksize = std::stoi(m_argv[i+1]);
 				}
-
-			}
 			
+			}
+			*/
 			
 			//deletar o vetor dinmaico criado aqui ao inves de no desconstrutor.
 			return true;
@@ -217,6 +222,50 @@ class Life {
 			short qntVizinhos = 0;
 			//vizinhos de itens nas bordas.
 			//siginifica que esta na borda.
+			// or i+1 >= m_width or j+1 >= m_width or j-1 < 0)
+			if(not(i-1 < 0)) {
+				if(not(j-1 < 0)) {
+					if(cells[(i-1) + m_width*(j-1)].is_alive()) {
+						qntVizinhos++;
+					}	
+				}
+				if(!(j+1 >= m_height)) {
+					if(cells[(i-1) + m_width*(j+1)].is_alive()) {
+						qntVizinhos++;
+					}	
+				}
+				if(cells[(i-1) + m_width*j].is_alive()) {
+					qntVizinhos++;
+				}
+				
+			}
+
+			if(!(i+1 >= m_width)) {
+				if(!(j-1 < 0)) {
+					if(cells[(i+1) + m_width*(j-1)].is_alive()) {
+						qntVizinhos++;
+					}	
+				}
+				if(!(j+1 >= m_height)) {
+					if(cells[(i+1) + m_width*(j+1)].is_alive()) {
+						qntVizinhos++;
+					}	
+				}
+				if(cells[(i+1) + m_width*j].is_alive()) {
+					qntVizinhos++;
+				}
+			}
+			if(!(j-1 < 0)) {
+				if(cells[i + m_width*(j-1)].is_alive()) {
+					qntVizinhos++;
+				}	
+			}
+			if(!(j+1 >= m_height)) {
+				if(cells[i + m_width*(j+1)].is_alive()) {
+					qntVizinhos++;
+				}	
+			}
+			
 			/*
 			if(i == m_height-1 or i == 0 or j == 0 or j == m_width-1) {
 				if(i == 0 and j == 0) {
@@ -281,6 +330,7 @@ class Life {
 			//celula nos cantos diagonais.
 			//i = 0; j = 0;
 			//ANTES FAZER O BASICO.
+			/*
 			if(cells[(i-1) + m_width*(j-1)].is_alive()) {
 				qntVizinhos++;
 			}
@@ -290,12 +340,9 @@ class Life {
 			if(cells[(i-1) + m_width*(j+1)].is_alive()) {
 				qntVizinhos++;
 			}
-			if(cells[i + m_width*(j-1)].is_alive()) {
-				qntVizinhos++;
-			}
-			if(cells[i + m_width*(j+1)].is_alive()) {
-				qntVizinhos++;
-			}
+			*/
+			
+			/*
 			if(cells[(i+1) + m_width*(j-1)].is_alive()) {
 				qntVizinhos++;
 			}
@@ -305,7 +352,7 @@ class Life {
 			if(cells[(i+1) + m_width*(j+1)].is_alive()) {
 				qntVizinhos++;
 			}
-
+			*/
 			return qntVizinhos;
 
 		}
@@ -350,26 +397,26 @@ class Life {
 		//sabendo o numero de celulas vivas, vamos declarar
 
 		void process_simulation() {
-			int x = 1;
-			while(x < 10) {
+			//int x = 1;
+			//while(x < 10) {
 				updateLiveCells(cells);
 				//copiar a imagem atual para a copia.
-				vetorVivos(x);
+				vetorVivos(m_xx);
 				cellsCopy = cells;
 				
-				print(); //mostrar a imagem.
+				
 				
 
 				//checar a quantidade de vivos.
 				//std::cout << "Numero de celulas vivas: " << liveCells.size() << "\n";
 				//vetorVivos(x);
-				/*
+				
 				std::cout << "celulas vivas: \n";
 				for(int i = 0; i < liveCells.size(); i++) {
 					std::cout << liveCells[i] << " ";
 				}
 				std::cout << "\n";
-				*/
+				
 				
 				//Contar a quantidade de vizinhos de cada celula.
 				for(int j = 0; j < m_height; j++) { //começar de 0, 1 é teste.
@@ -396,13 +443,14 @@ class Life {
 					
 				cells = cellsCopy;
 
-				//print();
+				print();
+				
 				
 				
 				std::string filename;
-				filename = "Generation " + std::to_string(x);
+				filename = "Generation " + std::to_string(m_xx);
 				
-				Canvas img( m_width, m_height, 100);
+				Canvas img( m_width, m_height, 10);
 			//pintar todos os pixels, teste.
 				//descobrir valor da coluna.
 				for(auto i = 0u; i < liveCells.size(); i++) {
@@ -414,10 +462,10 @@ class Life {
 				}
 					encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height() );	
 			
-
-	    		x++;
+				
+	    		//x++;
 	    		
-			}
+			//}
 			std::cerr << "CHEGOUA AKI!!\n";
 
 			//remove("saida.txt");
@@ -430,12 +478,17 @@ class Life {
 
 		//caso a simulação termine.
 		bool end_simulation() {
-			process_simulation(); //porenquanto
+			while(m_xx < 100) {
+
+				process_simulation(); //porenquanto
+				print(); //mostrar a imagem.
+				m_xx++;	
+			}
+			
 			//teste
 			//Canvas img( 50, 50, 30);
     		//largura x altura...
     		
-			std::cerr << "CHEOGU AKI TBM\n";
 			return true;
 			//verificar se é estavel.
 			//verificar se é extinta;
