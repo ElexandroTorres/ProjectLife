@@ -339,7 +339,7 @@ class Life {
 			std::string filename;
 			filename = "Generation " + std::to_string(m_xx);
 				
-			Canvas img( m_width, m_height, 10);
+			Canvas img( m_width, m_height, 20);
 			//pintar todos os pixels, teste.
 			//descobrir valor da coluna.
 			for(auto i = 0u; i < liveCells.size(); i++) {
@@ -382,7 +382,7 @@ class Life {
 		//caso a simulação termine.
 		bool end_simulation() {
 			//while(m_xx <= 3) {
-			if(m_xx <= 3) {
+			if(m_xx <= 16) {
 				print();
 				process_simulation(); //porenquanto
 

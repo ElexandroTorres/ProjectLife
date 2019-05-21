@@ -40,7 +40,7 @@ iostream
 lodepng.h
 ../include/lodepng.h
 
-/home/elexandro/Documentos/ProjectLife/include/life.h
+/home/xaninho/Documentos/ProjectLife/include/life.h
 iostream
 -
 string
@@ -54,7 +54,7 @@ stdio.h
 canvas.h
 -
 
-/home/elexandro/Documentos/ProjectLife/src/main.cpp
+/home/xaninho/Documentos/ProjectLife/src/main.cpp
 ../include/life.h
-/home/elexandro/Documentos/ProjectLife/include/life.h
+/home/xaninho/Documentos/ProjectLife/include/life.h
 
