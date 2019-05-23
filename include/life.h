@@ -9,43 +9,78 @@
 
 #include <canvas.h>
 
+// Função para validar se uma string é um numero.
+bool isValidNumber(const std::string number) {
+	for(int i = 0; i < number.size(); i++) {
+		// Caso o caractere não esteja entre 0 e 9 não será um numero valido.
+		if(number[i] < '0' or number[i] > '9') {
+			return false; 
+		}
+	}
+	return true;
+}
+
 //definição de uma celula.
 class Cell {
 	private:
-		bool c_alive; // Estado da celula, true significa celula viva e false celula morta.
-		short c_numberOfNeighbors;
+		bool c_alive; //!< Estado da célula, true significa celula viva e false celula morta.
+		short c_numberOfNeighbors; //!< Quantidade de vizinhos atuais da célula que estão vivos.
 	public:
+		/*
+		 * Construtor padrão, inicializando a célula como morta.
+		*/
 		Cell(bool alive = false) {
 			c_alive = alive;
 			c_numberOfNeighbors = 0;
 		}
+		/*
+		 * Construtor copia.
+		*/
 		Cell(const Cell &clone) {
           c_alive = clone.c_alive;
           c_numberOfNeighbors = clone.c_numberOfNeighbors;
         }
+        /*
+         * Destrutor padrão.
+        */
 		~Cell() = default;
-
+		/*
+         * Atribui um estado para a celula.
+         * @param state, booleano representado o estado da célula. True para viva e false para morta.
+		*/
 		void set_state(bool state) {
 			c_alive = state;
 		}
-
+		/*
+		 * Verifica se a célula está viva.
+		 * @return true caso esteja viva e false caso contrario.
+		*/
 		bool is_alive() {
 			return c_alive;
 		}
-		//mata uma celula.
+		/*
+		 * "Mata" a célula definindo seu estado para false.
+		*/
 		void kill() {
 			c_alive = false;
 		}
-
+		/*
+		 * Faz "nascer" uma célula definindo seu estado para true.
+		*/
 		void born() {
 			c_alive = true;
 		}
-
+		/*
+         * Define a quantidade de vizinhos vivos da célula.
+         * @param n, numero de vizinhos vivos.
+		*/
 		void set_neighbors(short n) {
 			c_numberOfNeighbors = n;
 		}
-		
-		//checa quantos vizinhos vivos a celula tem.
+		/*
+		 * Retorna o numero de vizinhos vivos da célula.
+		 * @return quantidade de vizinhos vivos.
+		*/
 		short neighbors() {
 			return c_numberOfNeighbors;
 		}
@@ -55,8 +90,8 @@ class Cell {
 class Life {
 
 	private:
-		int m_argc;
-		std::vector<std::string> m_argv;
+		int m_argc; //!< Quantidade de argumentos passados por linha de comando.
+		std::vector<std::string> m_argv; //!< Lista de argumentos passados por linha de comando.
 		
 		std::string m_line;
 		int m_height;
@@ -65,20 +100,32 @@ class Life {
 
 		int m_xx = 1;
 
-		std::vector<Cell> cells;
-		std::vector<life::Coordenada> liveCells; //vetor que ira guardar a posição da celula viva.
-		std::vector<Cell> cellsCopy;
+		std::vector<Cell> cells; //!< Lista de células da simulação.
+		std::vector<life::Coordenada> liveCells; //<! Lista de células vivas da simulação.
+		std::vector<Cell> cellsCopy; //<! Copia do liveCells.
+
+		std::string m_imagesDirectory = "none";
+		int m_maxGen = -1;
+		int m_fps = 2; //<! Numero de fps das exibições das celulas, caso padrão será.
+		int m_blockSize = 5;
 
 	public:
-		//Construtor padrão.
+		/*
+		 * Construtor padrão.
+		 * @param argc, quantidade de argumentos passados por linha de comando.
+		 * @param argv, lista de argumentos passados por linha de comando.
+		*/
 		Life(int argc, const char *argv[]) {
 			m_argc = argc;
-			m_argv.resize(argc);		
+			m_argv.resize(argc);
+			// Passar os argumentos para um vector de strings para facilitar a manipulação posteriomente. 		
 			for(int i = 0; i < m_argc; i++) {
 				m_argv[i] = argv[i];
 			}
 		}
-
+		/*
+		 * Destrutor padrão.
+		*/
 		~Life() = default;
 		
 		// Example 1
@@ -91,7 +138,9 @@ class Life {
     		if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 		}
 
-		//Mostra a matriz, caso seja possivel.
+		/*
+		 * Imprime a matriz de células na saida padrão.
+		*/
 		void print() {
 			std::cout << "Impressão da matriz: \n\n";
 			for(int j = 0; j < m_height; j++) {
@@ -107,45 +156,45 @@ class Life {
 				std::cout << " |\n";
 			}
 		}
-
-		void carregar_configuracoes(std::fstream &arquivo) {
-			arquivo >> m_height; // Ler o numero de linhas(altura) da "imagem".
-			arquivo >> m_width; // Ler o numero de colunas(largura) da "imagem".
-			arquivo >> m_vivo; // Ler o caractere que irá representar uma celula viva.
-			std::cout << "Linhas: " << m_height << " | colunas: " << m_width << " | vivo: " << m_vivo << "linhas + colunas = " << m_height + m_width<< "\n";
+		/*
+		 * Carrega as configurações passadas no arquivo.
+		 * @param arquivo, arquivo de configuração.
+		*/
+		void carregar_configuracoes(std::fstream &config) {
+			config >> m_height; // Ler o numero de linhas(altura) da "imagem".
+			config >> m_width; // Ler o numero de colunas(largura) da "imagem".
+			config >> m_vivo; // Ler o caractere que irá representar uma celula viva.
 			
-			cells.resize(m_height*m_width);//
-			cellsCopy.resize(m_height*m_width);
-			//teste criar imagem.
-
-			int j = 0;
-			while(arquivo >> m_line and j < m_height) {
-				for(auto i = 0u; i < m_line.size(); i++) {
-					if(i < m_width) {
-						// Apenas os caracteres que representam as celulas vivas serão incluidos.
-						if(m_line[i] == m_vivo) { 
-							cells[i + m_width * j].set_state(true);	
+			cells.resize(m_height*m_width); // Redefine o tamanho de cells para armazenar todos as células.
+			cellsCopy.resize(m_height*m_width); // Redefine o tamanho da copia.
+			//Varre todo o arquivo em busca das celulas vivas e mortas e redefine seu estado.
+			int row = 0;
+			while(config >> m_line and row < m_height) {
+				for(auto column = 0u; column < m_line.size(); column++) {
+					if(column < m_width) {
+						/* Toda vez que for encontrado o caractere que representa as células vivas será definido o estado
+						da céula como viva e caso o contrario como morta. */
+						if(m_line[column] == m_vivo) { 
+							cells[column + m_width * row].set_state(true);	
 						}
 						else{
-							cells[i + m_width * j].set_state(false);
+							cells[column + m_width * row].set_state(false);
 						}	
 					}
 				}
-				j++;
+				row++;
 			}
-
 		}
-		
-
 		/*
-		 * Valida os argumentos apssados pela linha de comando, retornando falso caso não sejam validos e insuficientes.
+		 * Valida os argumentos passados pela linha de comando, retornando falso caso não sejam validos ou insuficientes.
+		 * @return true caso todos os argumentos sejam validados e false caso contrario.
 		*/
 		bool validar_argumentos(void) {
 			// Caso não seja passado nenhum argumento de configuração.
 			if(m_argc == 1) {
 				return false;
 			}
-			//verificar se o argumento de configuração passado é o "--help";
+			// Verificar se o argumento de configuração passado é o "--help";
 			if(m_argv[1] == "--help") {
 				//Mostrar mensagem de ajuda.
 				std::cout << "Usage: glife <input_config_file> [<options>]\n";
@@ -164,11 +213,11 @@ class Life {
 				std::cout << "    GREEN LIGHT_BLUE LIGHT_GREY LIGHT_YELLOW RED STEEL_BLUE\n";
 				std::cout << "    WHITE YELLOW\n";
 							  	
-
 				return false;
 			}
-			
+
 			//COnsiderar que o primeiro argumento de configuração vai ser o nome do arquivo.
+			/*
 			std::fstream arquivo(m_argv[1]);
 			if(arquivo.is_open()) { //caso o arquivo exista...
 				carregar_configuracoes(arquivo);
@@ -177,28 +226,70 @@ class Life {
 			else {
 				std::cout << "arquivo informado não existe!\n";
 			}
-
-			/*
-			//varrer todo o vetor de argumentos.
-			for(int i = 2; i < m_argc; i++) {
-				if(m_argv[i] == "--imgdir") {
-					//verificar se segue o argumento com um diretorio.
-					//acho que criando um arquivo e especificando onde ele fica será criado uma pasta.
-				}
-				if(m_argv[i] == "--maxgen") {
-					int m_numGeracoes = std::stoi(m_argv[i+1]);
-					std::cout << "numero de gerações: " << m_numGeracoes << std::endl;
-				}
-				if(m_argv[i] == "--fps") {
-					int m_numfps = std::stoi(m_argv[i+1]);
-				}
-				if(m_argv[i] == "--blocksize") {
-					int m_blocksize = std::stoi(m_argv[i+1]);
-				}
-			
-			}
 			*/
 			
+			// Varrer todos os argumentos.
+			for(int i = 1; i < m_argc; i++) {
+				if(m_argv[i] == "--imgdir") {
+					m_imagesDirectory = m_argv[++i];
+					std::cout << "Diretorio: " << m_imagesDirectory << "\n"; 
+				}
+				else if(m_argv[i] == "--maxgen") {
+					// Verificar se o argumento seguinte é um numero valido.
+					if(isValidNumber(m_argv[++i])) {
+						m_maxGen = std::stoi(m_argv[i]);
+						std::cout << "numero de gerações: " << m_maxGen << std::endl;
+					}
+					else {
+						std::cout << m_argv[i] << " it's not a valid number. Use --help to see the valid options.\n";
+						return false;
+					}
+					
+				}
+				else if(m_argv[i] == "--fps") {
+					// Verificar se o argumento seguinte é um numero valido.
+					if(isValidNumber(m_argv[++i])) {
+						m_fps = std::stoi(m_argv[i]);
+						std::cout << "numero de fps: " << m_fps << std::endl;
+					}
+					else {
+						std::cout << m_argv[i] << " it's not a valid number. Use --help to see the valid options.\n";
+						return false;
+					}
+				}
+				else if(m_argv[i] == "--blocksize") {
+					// Verificar se o argumento seguinte é um numero valido.
+					if(isValidNumber(m_argv[++i])) {
+						m_blockSize = std::stoi(m_argv[i]);
+						std::cout << "tamanho do bloco: " << m_blockSize << std::endl;
+					}
+					else {
+						std::cout << m_argv[i] << " it's not a valid number. Use --help to see the valid options.\n";
+						return false;	
+					}
+				}
+				else if(m_argv[i] == "--bkgcolor <color>") {
+					//TODO.
+				}
+				else if(m_argv[i] == "--alivecolor <color>") {
+					//TODO.
+				}
+				else if(m_argv[i] == "--outfile <filename>") {
+					//TODO.
+				}
+				else {
+					std::fstream config(m_argv[i]);
+					// Verificar se foi possivel abrir o arquivo.
+					if(config.is_open()) { 
+						carregar_configuracoes(config);
+						config.close();
+					}
+					else {
+						std::cout << "Informed file does not exist.\n";
+						return false;
+					}
+				}
+			}
 			//deletar o vetor dinmaico criado aqui ao inves de no desconstrutor.
 			return true;
 		}
@@ -266,10 +357,11 @@ class Life {
 
 		}
 
-
-		void updateLiveCells(std::vector<Cell> &c) {
-			//checar quais as celuas estão vivas.
-			//inicialmente limpar o vetor.
+		/*
+		 * Atualiza a lista de células vivas.
+		 * @param lista de células.
+		*/
+		void update_liveCells(std::vector<Cell> &c) {
 			if(liveCells.size() > 0) {
 				liveCells.clear();	
 			}
@@ -282,52 +374,51 @@ class Life {
 			}
 
 		}
-		
-		void vetorVivos(int numge) { //numge, numero da geração.
-			std::fstream teste;
-			//caso seja  a primera geração. criar um arquivo apenas como modo de escrita.
+		/*
+		 * Salva a lista de células vivas em um arquivo para poder consulta-las posteriomente.
+		 * @param numge, Numero da geração atual.
+		*/
+		void save_generations(int numge) {
+			std::fstream outLiveCells;
+			// Caso seja a primera geração. criar um arquivo apenas como modo de escrita.
 			if(numge == 1) {
-				teste.open("saida.txt", std::fstream::out /*std::fstream::trunc*/);
+				outLiveCells.open("liveCellsGenerations.txt", std::fstream::out /*std::fstream::trunc*/);
 			}
 			else {
-				teste.open("saida.txt", std::fstream::app);	
+				outLiveCells.open("liveCellsGenerations.txt", std::fstream::app);	
 			}
-			teste << numge << " " << liveCells.size();
+
+			outLiveCells << numge << " " << liveCells.size();
 			for(auto i = 0u; i < liveCells.size(); i++) {
-				teste << " " << liveCells[i];	
+				outLiveCells << " " << liveCells[i];	
 			}
-			teste << "\n";
+			outLiveCells << "\n";
 			
-			teste.close();
+			outLiveCells.close();
 		}
-
-		
-
-		//sabendo o numero de celulas vivas, vamos declarar
-
+		/*TODO*/
 		void process_simulation() {
 			
-			updateLiveCells(cells); //verifica quais celulas estão vivas.
+			update_liveCells(cells); // Verifica quais as células que estão vivas.
 			
-			vetorVivos(m_xx); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
+			save_generations(m_xx); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
 			
 			cellsCopy = cells;
 				
-			//Contar a quantidade de vizinhos de cada celula.
-			for(int j = 0; j < m_height; j++) { //começar de 0, 1 é teste.
-				for(int i = 0; i < m_width; i++) { //começar de 0, 1 é teste, ir até m_width, por enquanto é teste.
-					cells[i + m_width*j].set_neighbors(checarVizinhos(i, j)); //tetorna a quantidade de vizinhos desta celula.
+			// Verifica e define quantos vizinhos cada célula tem.
+			for(int j = 0; j < m_height; j++) { 
+				for(int i = 0; i < m_width; i++) {
+					cells[i + m_width*j].set_neighbors(checarVizinhos(i, j));
 				}
 			}
-
-			//procurar quem tem exatamente 3 vizinhos para viver.
-			//sobrevive se tem 2 ou 3.
-			//e morre caso contrario.
+			// Verifica quais células irão mudar o seu estado.
 			for(int j = 0; j < m_height; j++) {
 				for(int i  = 0; i < m_width; i++) {
+					// Caso a célula esteja morta, verificar se ela irá "nascer".
 					if(not cells[i +m_width*j].is_alive() and cells[i +m_width*j].neighbors() == 3) {
 						cellsCopy[i +m_width*j].born();
 					}
+					// Caso a célula esteja viva, verificar se ela continuarar a viver.(NOT TODAY).
 					else if(cells[i +m_width*j].is_alive() and (cells[i +m_width*j].neighbors() < 2 or cells[i +m_width*j].neighbors() > 3)) {
 						cellsCopy[i +m_width*j].kill();
 					}
@@ -335,11 +426,12 @@ class Life {
 			}
 
 			cells = cellsCopy;
-			//fazer função para gravar a iamgem.					
+			//fazer função para gravar a iamgem.
+			/*					
 			std::string filename;
 			filename = "Generation " + std::to_string(m_xx);
 				
-			Canvas img( m_width, m_height, 20);
+			Canvas img( m_width, m_height, 10);
 			//pintar todos os pixels, teste.
 			//descobrir valor da coluna.
 			for(auto i = 0u; i < liveCells.size(); i++) {
@@ -348,6 +440,7 @@ class Life {
 				img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
 			}
 			encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
+			*/
 		
 		}
 		
@@ -382,8 +475,8 @@ class Life {
 		//caso a simulação termine.
 		bool end_simulation() {
 			//while(m_xx <= 3) {
-			if(m_xx <= 16) {
-				print();
+			if(m_xx <= 2) {
+				//print();
 				process_simulation(); //porenquanto
 
 				//checar estabilidade.
@@ -405,5 +498,6 @@ class Life {
 
 
 };
+
 
 #endif
