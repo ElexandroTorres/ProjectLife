@@ -15,7 +15,7 @@
  * @return true caso seja um numero valido e false caso contrario.
 */
 bool isValidNumber(const std::string number) {
-	for(int i = 0; i < number.size(); i++) {
+	for(auto i = 0u; i < number.size(); i++) {
 		// Caso o caractere não esteja entre 0 e 9 não será um numero valido.
 		if(number[i] < '0' or number[i] > '9') {
 			return false; 
@@ -130,29 +130,13 @@ class Life {
 
 		std::vector<std::string> m_generationData; //<! Armazenamento da lista de células vivas de todas as gerações.
 
-	public:
-		/*
-		 * Construtor padrão.
-		 * @param argc, quantidade de argumentos passados por linha de comando.
-		 * @param argv, lista de argumentos passados por linha de comando.
-		*/
-		Life(int argc, const char *argv[]) {
-			m_argc = argc;
-			m_argv.resize(argc);
-			// Passar os argumentos para um vector de strings para facilitar a manipulação posteriomente. 		
-			for(int i = 0; i < m_argc; i++) {
-				m_argv[i] = argv[i];
-			}
-		}
-		/*
-		 * Destrutor padrão.
-		*/
-		~Life() = default;
+		/* Metodos privados */
+
 		/*
 		 * Imprime a matriz de células na saida padrão.
 		*/
 		void print() {
-			std::cout << "Impressão da matriz: \n\n";
+			std::cout << "Generation " << m_currentGeneration << ":\n";
 			for(int j = 0; j < m_height; j++) {
 				std::cout << "| ";
 				for(int i = 0; i < m_width; i++) {
@@ -164,6 +148,25 @@ class Life {
 					}
 				}
 				std::cout << " |\n";
+			}
+		}
+
+		void print_file() {
+		
+			std::fstream outfile(m_outfileName, std::fstream::app);
+			
+			outfile << "Generation " << m_currentGeneration << ":\n";
+			for(int j = 0; j < m_height; j++) {
+				outfile << "| ";
+				for(int i = 0; i < m_width; i++) {
+					if(cells[i + m_width * j].is_alive()) {
+						outfile << "*";
+					}
+					else {
+						outfile << " ";	
+					}
+				}
+				outfile << " |\n";
 			}
 		}
 		/*
@@ -180,7 +183,7 @@ class Life {
 			//Varre todo o arquivo em busca das celulas vivas e mortas e redefine seu estado.
 			int row = 0;
 			while(config >> m_line and row < m_height) {
-				for(auto column = 0u; column < m_line.size(); column++) {
+				for(int column = 0; column < (int)m_line.size(); column++) {
 					if(column < m_width) {
 						/* Toda vez que for encontrado o caractere que representa as células vivas será definido o estado
 						da céula como viva e caso o contrario como morta. */
@@ -306,18 +309,6 @@ class Life {
 			return true;
 		}
 
-		/*
-		 * Valida os argumentos passados na linha de comando e finaliza a simulação caso eles sejam invalidos.
-		 * @return true caso todos os asgumentos sejam validados e false caso contrario.
-		*/
-		bool start(void) {
-			//Se os argumentos não forem validados.
-			if(!validar_argumentos()) {
-				return false;
-			}
-			//caso os argumentos sejam validados.
-			return true;	
-		}
 		/*
 		 * Verifica quantos vizinhos a célula tem.
 		 * @param i, Coluna onde está a célula.
@@ -452,22 +443,7 @@ class Life {
 			}
 			// Caso um arquivo de texto de saida tenha sido especificado.
 			if(m_outfileName != "none") {
-				filename = "Generation " + std::to_string(m_currentGeneration);
-				std::fstream outfile(m_outfileName, std::fstream::app);
-				//Ja foi verificado se o arquivo exite.
-				outfile << filename << " \n";
-				for(int j = 0; j < m_height; j++) {
-					outfile << "| ";
-					for(int i = 0; i < m_width; i++) {
-						if(cells[i + m_width * j].is_alive()) {
-							outfile << "*";
-						}
-						else {
-							outfile << " ";	
-						}
-					}
-					outfile << " |\n";
-				}
+				print_file();
 			}
 			if(m_imagesDirectory == "none") {
 				print();
@@ -480,11 +456,11 @@ class Life {
 		 * @return true caso sejá estavél e false caso contrario.
 		*/
 		bool is_stable() {
-			for(int i = 0; i < m_generationData.size() - 1; i++) {
+			for(auto i = 0u; i < m_generationData.size() - 1; i++) {
 				/* Verificar se a ultima geração adicionada(no caso a atual) é igual a alguma outra.
 				   Caso seja, significa que a geração atual é estavel. */
 				if(m_generationData[m_generationData.size()-1] == m_generationData[i]) {
-					std::cout << "Stable in generation " << i+1 << "\n";
+					std::cout << "The last generation is stable with the generation " << i+1 << "\n";
 					return true;
 				}
 			}
@@ -496,10 +472,45 @@ class Life {
 		*/
 		bool is_extinguished() {
 			if(m_generationData[m_generationData.size()-1] == " ") {
+				std::cout << "The last generation became extinct\n";
 				return true;
 			}
 			return false;
 		}
+
+	public:
+		/*
+		 * Construtor padrão.
+		 * @param argc, quantidade de argumentos passados por linha de comando.
+		 * @param argv, lista de argumentos passados por linha de comando.
+		*/
+		Life(int argc, const char *argv[]) {
+			m_argc = argc;
+			m_argv.resize(argc);
+			// Passar os argumentos para um vector de strings para facilitar a manipulação posteriomente. 		
+			for(int i = 0; i < m_argc; i++) {
+				m_argv[i] = argv[i];
+			}
+		}
+		/*
+		 * Destrutor padrão.
+		*/
+		~Life() = default;
+		
+
+		/*
+		 * Valida os argumentos passados na linha de comando e finaliza a simulação caso eles sejam invalidos.
+		 * @return true caso todos os asgumentos sejam validados e false caso contrario.
+		*/
+		bool start(void) {
+			//Se os argumentos não forem validados.
+			if(!validar_argumentos()) {
+				return false;
+			}
+			//caso os argumentos sejam validados.
+			return true;	
+		}
+		
 		/*
 		 * Verifica se a simulação deve finalizar.
 		 * @return true caso a simulação seja finalizada e false caso contrario.
@@ -511,16 +522,15 @@ class Life {
 				process_simulation(); // Processa as informações da simulação.
 				// Verifica se é estavel e finaliza caso seja.
 				if(is_stable()) {
-					std::cout << "STABLE!!!\n";
 					return true;
 				}
 				if(is_extinguished()) {
-					std::cout << "EXTITAN.";
 					return true;
 				}
 				m_maxGen--;	
 				return false; //simulação não terminou.	
 			}
+			return true; //Simulação acabou
 		}
 
 
