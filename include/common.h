@@ -6,6 +6,71 @@
 #include <map>
 
 namespace life {
+  //definição de uma celula.
+class Cell {
+  private:
+    bool c_alive; //!< Estado da célula, true significa celula viva e false celula morta.
+    short c_numberOfNeighbors; //!< Quantidade de vizinhos atuais da célula que estão vivos.
+  public:
+    /*
+     * Construtor padrão, inicializando a célula como morta.
+    */
+    Cell(bool alive = false) {
+      c_alive = alive;
+      c_numberOfNeighbors = 0;
+    }
+    /*
+     * Construtor copia.
+    */
+    Cell(const Cell &clone) {
+          c_alive = clone.c_alive;
+          c_numberOfNeighbors = clone.c_numberOfNeighbors;
+        }
+        /*
+         * Destrutor padrão.
+        */
+    ~Cell() = default;
+    /*
+ * Atribui um estado para a celula.
+ * @param state, booleano representado o estado da célula. True para viva e false para morta.
+*/
+void set_state(bool state) {
+  c_alive = state;
+}
+/*
+ * Verifica se a célula está viva.
+ * @return true caso esteja viva e false caso contrario.
+*/
+bool is_alive() {
+  return c_alive;
+}
+/*
+ * "Mata" a célula definindo seu estado para false.
+*/
+void kill() {
+  c_alive = false;
+}
+/*
+ * Faz "nascer" uma célula definindo seu estado para true.
+*/
+void born() {
+  c_alive = true;
+}
+/*
+ * Define a quantidade de vizinhos vivos da célula.
+ * @param n, numero de vizinhos vivos.
+*/
+void set_neighbors(short n) {
+  c_numberOfNeighbors = n;
+}
+/*
+ * Retorna o numero de vizinhos vivos da célula.
+ * @return quantidade de vizinhos vivos.
+*/
+short neighbors() {
+  return c_numberOfNeighbors;
+}
+};
   /// Representa a coordenada de um pixel.
   class Coordenada {
 
@@ -76,24 +141,20 @@ namespace life {
        /// Creates a color.
        Color( color_t r=0, color_t g=0, color_t b=0 ) : channels{r,g,b} {/*empty*/}
        /// Copy constructor.
-       Color( const Color& clone )
-       {
+       Color( const Color& clone ) {
            std::memcpy( channels, clone.channels, sizeof(color_t)*3 );
        }
        /// Assignment operator.
-       Color& operator=( const Color& rhs )
-       {
+       Color& operator=( const Color& rhs ) {
            if ( &rhs != this )
                std::memcpy( channels, rhs.channels, sizeof(color_t)*3 );
            return *this;
        }
        /// Comparison operator.
-       bool operator==( const Color& rhs )
-       {
+       bool operator==( const Color& rhs ) {
            return not std::memcmp( channels, rhs.channels, sizeof(color_t)*3 );
        }
-       friend std::ostream& operator<<( std::ostream& os, const Color& c )
-       {
+       friend std::ostream& operator<<( std::ostream& os, const Color& c ) {
            os << "("<< (int)c.channels[0] << "," << (int)c.channels[1] << "," << (int)c.channels[2] << ")";
            return os;
        }

@@ -123,6 +123,33 @@ glife/fast:
 	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/build
 .PHONY : glife/fast
 
+src/life.o: src/life.cpp.o
+
+.PHONY : src/life.o
+
+# target to build an object file
+src/life.cpp.o:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/life.cpp.o
+.PHONY : src/life.cpp.o
+
+src/life.i: src/life.cpp.i
+
+.PHONY : src/life.i
+
+# target to preprocess a source file
+src/life.cpp.i:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/life.cpp.i
+.PHONY : src/life.cpp.i
+
+src/life.s: src/life.cpp.s
+
+.PHONY : src/life.s
+
+# target to generate assembly for a file
+src/life.cpp.s:
+	$(MAKE) -f CMakeFiles/glife.dir/build.make CMakeFiles/glife.dir/src/life.cpp.s
+.PHONY : src/life.cpp.s
+
 src/lodepng.o: src/lodepng.cpp.o
 
 .PHONY : src/lodepng.o
@@ -186,6 +213,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... glife"
 	@echo "... edit_cache"
+	@echo "... src/life.o"
+	@echo "... src/life.i"
+	@echo "... src/life.s"
 	@echo "... src/lodepng.o"
 	@echo "... src/lodepng.i"
 	@echo "... src/lodepng.s"

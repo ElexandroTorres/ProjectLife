@@ -13,6 +13,6 @@ include_directories(include)
 
 file(GLOB SOURCES "src/*.cpp")
  
-#add_executable(glife ../src/main.cpp, ../src/lodepng.cpp)
+#add_executable(glife ../src/main.cpp, ../src/lodepng.cpp ../src/life.cpp)
 
 add_executable(glife ${SOURCES})

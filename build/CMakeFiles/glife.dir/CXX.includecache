@@ -43,6 +43,8 @@ lodepng.h
 /home/elexandro/Documentos/ProjectLife/include/life.h
 iostream
 -
+algorithm
+-
 string
 -
 fstream
@@ -54,7 +56,7 @@ stdio.h
 canvas.h
 -
 
-/home/elexandro/Documentos/ProjectLife/src/main.cpp
+/home/elexandro/Documentos/ProjectLife/src/life.cpp
 ../include/life.h
 /home/elexandro/Documentos/ProjectLife/include/life.h
 

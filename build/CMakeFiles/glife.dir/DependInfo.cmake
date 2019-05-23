@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/elexandro/Documentos/ProjectLife/src/life.cpp" "/home/elexandro/Documentos/ProjectLife/build/CMakeFiles/glife.dir/src/life.cpp.o"
   "/home/elexandro/Documentos/ProjectLife/src/lodepng.cpp" "/home/elexandro/Documentos/ProjectLife/build/CMakeFiles/glife.dir/src/lodepng.cpp.o"
   "/home/elexandro/Documentos/ProjectLife/src/main.cpp" "/home/elexandro/Documentos/ProjectLife/build/CMakeFiles/glife.dir/src/main.cpp.o"
   )
