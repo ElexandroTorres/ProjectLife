@@ -98,7 +98,8 @@ class Life {
 		int m_width;
 		char m_vivo;
 
-		int m_xx = 1;
+		int m_currentGeneration = 1;
+
 
 		std::vector<Cell> cells; //!< Lista de células da simulação.
 		std::vector<life::Coordenada> liveCells; //<! Lista de células vivas da simulação.
@@ -401,7 +402,7 @@ class Life {
 			
 			update_liveCells(cells); // Verifica quais as células que estão vivas.
 			
-			save_generations(m_xx); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
+			save_generations(m_currentGeneration); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
 			
 			cellsCopy = cells;
 				
@@ -427,11 +428,11 @@ class Life {
 
 			cells = cellsCopy;
 			//fazer função para gravar a iamgem.
-			/*					
+								
 			std::string filename;
-			filename = "Generation " + std::to_string(m_xx);
+			filename = "Generation " + std::to_string(m_currentGeneration);
 				
-			Canvas img( m_width, m_height, 10);
+			Canvas img(m_width, m_height, 10);
 			//pintar todos os pixels, teste.
 			//descobrir valor da coluna.
 			for(auto i = 0u; i < liveCells.size(); i++) {
@@ -440,7 +441,7 @@ class Life {
 				img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
 			}
 			encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
-			*/
+			m_currentGeneration++;
 		
 		}
 		
@@ -454,16 +455,17 @@ class Life {
 				//while(saida >> m_line) {
 				while(saida >> geracao) {
 					saida >> quant;
-					std::cout << "Geração atual: " << geracao << "\n";
-					std::cout << "Quantidade de celulas: " << quant << "\n";
-					std::cout << "Celulas: ";
+					//std::cout << "Geração atual: " << geracao << "\n";
+					//std::cout << "Quantidade de celulas: " << quant << "\n";
+					//std::cout << "Celulas: ";
+					/*
 					for(int i = 0; i < quant*2; i++) {
 						saida >> dados;
 						//pegar os dados e colocar em um vetor, e fazer uma comparação entre ambos.
 						std::cout << dados << " ";
 					}
 					std::cout << "\n";
-				
+				*/
 				
 				}
 
@@ -474,21 +476,22 @@ class Life {
 
 		//caso a simulação termine.
 		bool end_simulation() {
-			//while(m_xx <= 3) {
-			if(m_xx <= 2) {
-				//print();
-				process_simulation(); //porenquanto
-
-				//checar estabilidade.
-				if(is_stable()) {
-
+			//verifica se é estavel.
+			//verifica se é extinta.
+			if(m_maxGen != -1) {
+				if(m_maxGen > 0) {
+					m_maxGen--;	
+					return false; //simulação não terminou.	
 				}
-				m_xx++;	
-				return false; //simulação não terminou.
-				
+				else {
+					return true;
+				}
 			}
-    		
-			return true;
+			else {
+				//so vai acabar com stable or exticnti.
+			}
+    		//VAI RODAR PRA SEMPRE, ATÉ ENCONTRAR STABLE.
+			//return true;
 			//verificar se é estavel.
 			//verificar se é extinta;
 			//verificar se o numero total de gerações ja foi executado.
