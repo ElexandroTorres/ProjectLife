@@ -119,10 +119,11 @@ class Life {
 
 
 		std::vector<Cell> cells; //!< Lista de células da simulação.
-		std::vector<life::Coordenada> liveCells; //<! Lista de células vivas da simulação.
+		std::vector<life::Coordenada> liveCells; //<! Lista de coordenadas das células vivas da simulação.
 		std::vector<Cell> cellsCopy; //<! Copia do liveCells.
 
 		std::string m_imagesDirectory = "none"; //<! Diretorio na qual as imagens da simulação serão armazenadas.
+		std::string m_outfileName = "none";
 		int m_maxGen = -1; //<! Quantidade de gerações que serão executadas. Padrão = -1.
 		int m_fps = 2; //<! Numero de fps das exibições das gerações. Padrão = 2.
 		int m_blockSize = 5; //<! Tamanho do bloco que representará uma célula na geração. Padrão =  5.
@@ -265,13 +266,27 @@ class Life {
 						return false;	
 					}
 				}
-				else if(m_argv[i] == "--bkgcolor <color>") {
+				else if(m_argv[i] == "--bkgcolor") {
+					//std::cout << "entrou bkgcolor\n\n";
+					i++;
 					//TODO.
 				}
-				else if(m_argv[i] == "--alivecolor <color>") {
+				else if(m_argv[i] == "--alivecolor") {
+					i++;
 					//TODO.
 				}
-				else if(m_argv[i] == "--outfile <filename>") {
+				else if(m_argv[i] == "--outfile") {
+					std::fstream outfile(m_argv[++i], std::fstream::out);
+					//Caso não tenha sido posivel criar o arquivo.
+					if(!outfile.is_open()) {
+						std::cout << "Impossible to create a file in that directory\n";
+						return false;
+					}
+					//outfile.open(m_argv[++i], std::fstream::in);
+					outfile << "Game of life: \n";
+					m_outfileName = m_argv[i];
+					outfile.close();
+
 					//TODO.
 				}
 				else {
@@ -282,7 +297,7 @@ class Life {
 						config.close();
 					}
 					else {
-						std::cout << "Informed file does not exist.\n";
+						std::cout << "Informed input file does not exist.\n";
 						return false;
 					}
 				}
@@ -421,11 +436,11 @@ class Life {
 
 			cells = cellsCopy;
 			/* Verifica qual o modo de saida desejado para as gerações. */
+			std::string filename;
+			// Definir o nome do arquivo como sendo Generation + numero da geração.
 			// Caso o diretorio de imagens tenha sido especificado.
 			if(m_imagesDirectory != "none") {
-				std::string filename;
-				// Definir o nome do arquivo como sendo Generation + numero da geração.
-				filename = "../" + m_imagesDirectory + "/Generation " + std::to_string(m_currentGeneration);
+				filename = m_imagesDirectory + "/Generation " + std::to_string(m_currentGeneration);
 				Canvas img(m_width, m_height, 10);
 				// Pintar as células vivas na imagem.
 				for(auto i = 0u; i < liveCells.size(); i++) {
@@ -434,8 +449,30 @@ class Life {
 				// Gerar a imagem no formato png.
 				encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
 				// Incrementa a geração atual.
-				m_currentGeneration++;
 			}
+			// Caso um arquivo de texto de saida tenha sido especificado.
+			if(m_outfileName != "none") {
+				filename = "Generation " + std::to_string(m_currentGeneration);
+				std::fstream outfile(m_outfileName, std::fstream::app);
+				//Ja foi verificado se o arquivo exite.
+				outfile << filename << " \n";
+				for(int j = 0; j < m_height; j++) {
+					outfile << "| ";
+					for(int i = 0; i < m_width; i++) {
+						if(cells[i + m_width * j].is_alive()) {
+							outfile << "*";
+						}
+						else {
+							outfile << " ";	
+						}
+					}
+					outfile << " |\n";
+				}
+			}
+			if(m_imagesDirectory == "none") {
+				print();
+			}
+			m_currentGeneration++;
 			
 		}
 		/*
