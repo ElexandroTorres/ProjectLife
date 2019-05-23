@@ -16,7 +16,7 @@ int main(int argc, const char *argv[]) {
 
 	while(!life.end_simulation()) {
 		//life.process_simulation();
-		life.process_simulation(); //porenquanto
+		//porenquanto
 		//verificar se é estavel.
 		//verificar se é extinta.
 	}

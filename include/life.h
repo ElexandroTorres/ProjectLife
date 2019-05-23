@@ -110,6 +110,8 @@ class Life {
 		int m_fps = 2; //<! Numero de fps das exibições das celulas, caso padrão será.
 		int m_blockSize = 5;
 
+		std::vector<std::string> m_generationData;
+
 	public:
 		/*
 		 * Construtor padrão.
@@ -379,30 +381,22 @@ class Life {
 		 * Salva a lista de células vivas em um arquivo para poder consulta-las posteriomente.
 		 * @param numge, Numero da geração atual.
 		*/
-		void save_generations(int numge) {
-			std::fstream outLiveCells;
-			// Caso seja a primera geração. criar um arquivo apenas como modo de escrita.
-			if(numge == 1) {
-				outLiveCells.open("liveCellsGenerations.txt", std::fstream::out /*std::fstream::trunc*/);
-			}
-			else {
-				outLiveCells.open("liveCellsGenerations.txt", std::fstream::app);	
+		void save_generations() {
+			//liveCells[i].get_x(), liveCells[i].get_y()
+			std::string currentGeneration = "";
+			for(auto i = 0u; i < liveCells.size(); i++) {
+				currentGeneration += std::to_string(liveCells[i].get_x()) + " " + std::to_string(liveCells[i].get_y()) + " ";	
 			}
 
-			outLiveCells << numge << " " << liveCells.size();
-			for(auto i = 0u; i < liveCells.size(); i++) {
-				outLiveCells << " " << liveCells[i];	
-			}
-			outLiveCells << "\n";
+			m_generationData.push_back(currentGeneration);
 			
-			outLiveCells.close();
 		}
 		/*TODO*/
 		void process_simulation() {
 			
 			update_liveCells(cells); // Verifica quais as células que estão vivas.
 			
-			save_generations(m_currentGeneration); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
+			save_generations(); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
 			
 			cellsCopy = cells;
 				
@@ -446,31 +440,16 @@ class Life {
 		}
 		
 		bool is_stable() {
-			std::fstream saida("saida.txt", std::fstream::in);
-			int geracao;
-			int quant;
-			int dados;
-			if(saida.is_open()) { //caso o arquivo exista...
-				//enquanto tiver linhas para serem lidas.
-				//while(saida >> m_line) {
-				while(saida >> geracao) {
-					saida >> quant;
-					//std::cout << "Geração atual: " << geracao << "\n";
-					//std::cout << "Quantidade de celulas: " << quant << "\n";
-					//std::cout << "Celulas: ";
-					/*
-					for(int i = 0; i < quant*2; i++) {
-						saida >> dados;
-						//pegar os dados e colocar em um vetor, e fazer uma comparação entre ambos.
-						std::cout << dados << " ";
-					}
-					std::cout << "\n";
-				*/
-				
+			for(int i = 0; i < m_generationData.size() - 1; i++) {
+				/* Verificar se a ultima geração adicionada(no caso a atual) é igual a alguma outra.
+				   Caso seja, significa que a geração atual é estavel. */
+				if(m_generationData[m_generationData.size()-1] == m_generationData[i]) {
+					std::cout << "Stable in generation " << i+1 << "\n";
+					return true;
 				}
-
-				saida.close();
 			}
+			return false;
+			
 		}
 		
 
@@ -478,17 +457,14 @@ class Life {
 		bool end_simulation() {
 			//verifica se é estavel.
 			//verifica se é extinta.
-			if(m_maxGen != -1) {
-				if(m_maxGen > 0) {
-					m_maxGen--;	
-					return false; //simulação não terminou.	
-				}
-				else {
+			if(m_maxGen != 0) {
+				process_simulation(); 
+				if(is_stable()) {
+					std::cout << "STABLE!!!\n";
 					return true;
 				}
-			}
-			else {
-				//so vai acabar com stable or exticnti.
+				m_maxGen--;	
+				return false; //simulação não terminou.	
 			}
     		//VAI RODAR PRA SEMPRE, ATÉ ENCONTRAR STABLE.
 			//return true;
