@@ -9,7 +9,11 @@
 
 #include <canvas.h>
 
-// Função para validar se uma string é um numero.
+/*
+ * Valida uma string como representação de um numero.
+ * @param number string que representa o número.
+ * @return true caso seja um numero valido e false caso contrario.
+*/
 bool isValidNumber(const std::string number) {
 	for(int i = 0; i < number.size(); i++) {
 		// Caso o caractere não esteja entre 0 e 9 não será um numero valido.
@@ -18,6 +22,19 @@ bool isValidNumber(const std::string number) {
 		}
 	}
 	return true;
+}
+/*
+ * Função para gerar a imagem.
+ * @param filename, o nome da imagem.
+ * @param image, tabela de pixels da imagem.
+ * @param width, Largura da imagem.
+ * @param height, Altura da imagem.
+*/
+void encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
+    //Encode the image
+    unsigned error = lodepng::encode(filename, image, width, height);
+    //if there's an error, display it
+    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
 }
 
 //definição de uma celula.
@@ -93,24 +110,24 @@ class Life {
 		int m_argc; //!< Quantidade de argumentos passados por linha de comando.
 		std::vector<std::string> m_argv; //!< Lista de argumentos passados por linha de comando.
 		
-		std::string m_line;
-		int m_height;
-		int m_width;
-		char m_vivo;
+		std::string m_line; //<! String para armazenar uma linha lida do arquivo de entrada.
+		int m_height; //<! Altura da tabela de celulas.
+		int m_width; //<! Largura da tabela de células.
+		char m_alive; //<! Caractere que representa uma célula viva.
 
-		int m_currentGeneration = 1;
+		int m_currentGeneration = 1; //<! Geração atual.
 
 
 		std::vector<Cell> cells; //!< Lista de células da simulação.
 		std::vector<life::Coordenada> liveCells; //<! Lista de células vivas da simulação.
 		std::vector<Cell> cellsCopy; //<! Copia do liveCells.
 
-		std::string m_imagesDirectory = "none";
-		int m_maxGen = -1;
-		int m_fps = 2; //<! Numero de fps das exibições das celulas, caso padrão será.
-		int m_blockSize = 5;
+		std::string m_imagesDirectory = "none"; //<! Diretorio na qual as imagens da simulação serão armazenadas.
+		int m_maxGen = -1; //<! Quantidade de gerações que serão executadas. Padrão = -1.
+		int m_fps = 2; //<! Numero de fps das exibições das gerações. Padrão = 2.
+		int m_blockSize = 5; //<! Tamanho do bloco que representará uma célula na geração. Padrão =  5.
 
-		std::vector<std::string> m_generationData;
+		std::vector<std::string> m_generationData; //<! Armazenamento da lista de células vivas de todas as gerações.
 
 	public:
 		/*
@@ -130,17 +147,6 @@ class Life {
 		 * Destrutor padrão.
 		*/
 		~Life() = default;
-		
-		// Example 1
-		// Encode from raw pixels to disk with a single function call
-		// The image argument has width * height RGBA pixels or width * height * 4 bytes
-		void encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
-    		//Encode the image
-    		unsigned error = lodepng::encode(filename, image, width, height);
-    		//if there's an error, display it
-    		if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
-		}
-
 		/*
 		 * Imprime a matriz de células na saida padrão.
 		*/
@@ -166,7 +172,7 @@ class Life {
 		void carregar_configuracoes(std::fstream &config) {
 			config >> m_height; // Ler o numero de linhas(altura) da "imagem".
 			config >> m_width; // Ler o numero de colunas(largura) da "imagem".
-			config >> m_vivo; // Ler o caractere que irá representar uma celula viva.
+			config >> m_alive; // Ler o caractere que irá representar uma celula viva.
 			
 			cells.resize(m_height*m_width); // Redefine o tamanho de cells para armazenar todos as células.
 			cellsCopy.resize(m_height*m_width); // Redefine o tamanho da copia.
@@ -177,7 +183,7 @@ class Life {
 					if(column < m_width) {
 						/* Toda vez que for encontrado o caractere que representa as células vivas será definido o estado
 						da céula como viva e caso o contrario como morta. */
-						if(m_line[column] == m_vivo) { 
+						if(m_line[column] == m_alive) { 
 							cells[column + m_width * row].set_state(true);	
 						}
 						else{
@@ -219,18 +225,6 @@ class Life {
 				return false;
 			}
 
-			//COnsiderar que o primeiro argumento de configuração vai ser o nome do arquivo.
-			/*
-			std::fstream arquivo(m_argv[1]);
-			if(arquivo.is_open()) { //caso o arquivo exista...
-				carregar_configuracoes(arquivo);
-				arquivo.close();
-			}
-			else {
-				std::cout << "arquivo informado não existe!\n";
-			}
-			*/
-			
 			// Varrer todos os argumentos.
 			for(int i = 1; i < m_argc; i++) {
 				if(m_argv[i] == "--imgdir") {
@@ -293,73 +287,79 @@ class Life {
 					}
 				}
 			}
-			//deletar o vetor dinmaico criado aqui ao inves de no desconstrutor.
+			
 			return true;
 		}
 
-
+		/*
+		 * Valida os argumentos passados na linha de comando e finaliza a simulação caso eles sejam invalidos.
+		 * @return true caso todos os asgumentos sejam validados e false caso contrario.
+		*/
 		bool start(void) {
 			//Se os argumentos não forem validados.
 			if(!validar_argumentos()) {
 				return false;
 			}
 			//caso os argumentos sejam validados.
-			return true;
-
-			
+			return true;	
 		}
-
-		short checarVizinhos(int i, int j) {
-			short qntVizinhos = 0;
-			//vizinhos de itens nas bordas.
-			//siginifica que esta na borda.
+		/*
+		 * Verifica quantos vizinhos a célula tem.
+		 * @param i, Coluna onde está a célula.
+		 * @param j, linha onde está a célula.
+		 * @return O numero de vizinhos da célula.
+		*/
+		short check_neighbors(int i, int j) {
+			short numberOfNeighbors = 0;
+			/*São verificados os casos em que os vizinhos da célula estão dentro dos limites e logo depois
+			analisados os seus vizinhos validos. Caso não possua vizinho valido para alguma posição, esta posição
+			não é analisada, logo não entra na contagem. */
 			if(not(i-1 < 0)) {
 				if(not(j-1 < 0)) {
 					if(cells[(i-1) + m_width*(j-1)].is_alive()) {
-						qntVizinhos++;
+						numberOfNeighbors++;
 					}	
 				}
 				if(!(j+1 >= m_height)) {
 					if(cells[(i-1) + m_width*(j+1)].is_alive()) {
-						qntVizinhos++;
+						numberOfNeighbors++;
 					}	
 				}
 				if(cells[(i-1) + m_width*j].is_alive()) {
-					qntVizinhos++;
+					numberOfNeighbors++;
 				}
-				
 			}
 
 			if(!(i+1 >= m_width)) {
 				if(!(j-1 < 0)) {
 					if(cells[(i+1) + m_width*(j-1)].is_alive()) {
-						qntVizinhos++;
+						numberOfNeighbors++;
 					}	
 				}
 				if(!(j+1 >= m_height)) {
 					if(cells[(i+1) + m_width*(j+1)].is_alive()) {
-						qntVizinhos++;
+						numberOfNeighbors++;
 					}	
 				}
 				if(cells[(i+1) + m_width*j].is_alive()) {
-					qntVizinhos++;
+					numberOfNeighbors++;
 				}
 			}
+
 			if(!(j-1 < 0)) {
 				if(cells[i + m_width*(j-1)].is_alive()) {
-					qntVizinhos++;
+					numberOfNeighbors++;
 				}	
 			}
 			if(!(j+1 >= m_height)) {
 				if(cells[i + m_width*(j+1)].is_alive()) {
-					qntVizinhos++;
+					numberOfNeighbors++;
 				}	
 			}
 			
-			return qntVizinhos;
+			return numberOfNeighbors;
 
 		}
-
 		/*
 		 * Atualiza a lista de células vivas.
 		 * @param lista de células.
@@ -378,12 +378,10 @@ class Life {
 
 		}
 		/*
-		 * Salva a lista de células vivas em um arquivo para poder consulta-las posteriomente.
-		 * @param numge, Numero da geração atual.
+		 * Salva a lista de células vivas em uma lista de gerações. As gerações são adicionadas de acordo com sua ordem.
 		*/
 		void save_generations() {
-			//liveCells[i].get_x(), liveCells[i].get_y()
-			std::string currentGeneration = "";
+			std::string currentGeneration = " ";
 			for(auto i = 0u; i < liveCells.size(); i++) {
 				currentGeneration += std::to_string(liveCells[i].get_x()) + " " + std::to_string(liveCells[i].get_y()) + " ";	
 			}
@@ -391,19 +389,20 @@ class Life {
 			m_generationData.push_back(currentGeneration);
 			
 		}
-		/*TODO*/
+		/*
+		 * Processa a simulação de acordo com as regras do jogo da vida.
+		*/
 		void process_simulation() {
 			
 			update_liveCells(cells); // Verifica quais as células que estão vivas.
 			
-			save_generations(); //Adiciona as celulas vivas a um arquivo com um identificador de qual geração ela pertence.
+			save_generations(); //Adiciona as celulas vivas a uma lista de gerações.
 			
 			cellsCopy = cells;
-				
 			// Verifica e define quantos vizinhos cada célula tem.
 			for(int j = 0; j < m_height; j++) { 
 				for(int i = 0; i < m_width; i++) {
-					cells[i + m_width*j].set_neighbors(checarVizinhos(i, j));
+					cells[i + m_width*j].set_neighbors(check_neighbors(i, j));
 				}
 			}
 			// Verifica quais células irão mudar o seu estado.
@@ -421,24 +420,28 @@ class Life {
 			}
 
 			cells = cellsCopy;
-			//fazer função para gravar a iamgem.
-								
-			std::string filename;
-			filename = "Generation " + std::to_string(m_currentGeneration);
-				
-			Canvas img(m_width, m_height, 10);
-			//pintar todos os pixels, teste.
-			//descobrir valor da coluna.
-			for(auto i = 0u; i < liveCells.size(); i++) {
-				//std::cout << "valores das coordenadas: \n";
-				//std::cout << "X: " << liveCells[i].get_x() << " Y: " << liveCells[i].get_y() << "\n"; 
-				img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
+			/* Verifica qual o modo de saida desejado para as gerações. */
+			// Caso o diretorio de imagens tenha sido especificado.
+			if(m_imagesDirectory != "none") {
+				std::string filename;
+				// Definir o nome do arquivo como sendo Generation + numero da geração.
+				filename = "../" + m_imagesDirectory + "/Generation " + std::to_string(m_currentGeneration);
+				Canvas img(m_width, m_height, 10);
+				// Pintar as células vivas na imagem.
+				for(auto i = 0u; i < liveCells.size(); i++) {
+					img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , life::RED );
+				}
+				// Gerar a imagem no formato png.
+				encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
+				// Incrementa a geração atual.
+				m_currentGeneration++;
 			}
-			encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
-			m_currentGeneration++;
-		
+			
 		}
-		
+		/*
+		 * Verifica se a geração é estavél. Ou seja, existe outra geração no passado que foi igual a ela.
+		 * @return true caso sejá estavél e false caso contrario.
+		*/
 		bool is_stable() {
 			for(int i = 0; i < m_generationData.size() - 1; i++) {
 				/* Verificar se a ultima geração adicionada(no caso a atual) é igual a alguma outra.
@@ -449,30 +452,38 @@ class Life {
 				}
 			}
 			return false;
-			
 		}
-		
-
-		//caso a simulação termine.
+		/*
+		 * Verifica se a geração é extinta. Ou seja, não existe nenhuma célula viva.
+		 * @return true caso seja extinta e false caso contrario.
+		*/
+		bool is_extinguished() {
+			if(m_generationData[m_generationData.size()-1] == " ") {
+				return true;
+			}
+			return false;
+		}
+		/*
+		 * Verifica se a simulação deve finalizar.
+		 * @return true caso a simulação seja finalizada e false caso contrario.
+		*/
 		bool end_simulation() {
-			//verifica se é estavel.
-			//verifica se é extinta.
+			/* Executa a geração de acordo com a quantidade especificada pelo usuario, caso não tenha sido especificado
+			as gerações irão continuar até atigingir uma das condições de finalização: Estabilidade ou extinção. */
 			if(m_maxGen != 0) {
-				process_simulation(); 
+				process_simulation(); // Processa as informações da simulação.
+				// Verifica se é estavel e finaliza caso seja.
 				if(is_stable()) {
 					std::cout << "STABLE!!!\n";
+					return true;
+				}
+				if(is_extinguished()) {
+					std::cout << "EXTITAN.";
 					return true;
 				}
 				m_maxGen--;	
 				return false; //simulação não terminou.	
 			}
-    		//VAI RODAR PRA SEMPRE, ATÉ ENCONTRAR STABLE.
-			//return true;
-			//verificar se é estavel.
-			//verificar se é extinta;
-			//verificar se o numero total de gerações ja foi executado.
-			//caso alguma dessas operações tenha acontecido, retorne true.
-			//caso nenhuma tenha acontecido ainda, a simuação continua, ou seja, retorna false.
 		}
 
 
