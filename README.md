@@ -1,6 +1,7 @@
 Life
 ====
 **Projeto de implementação do jogo da vida de Conway.**
+
 Autoria de **Elexandro Torres Tavares**
 
 
