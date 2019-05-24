@@ -1,0 +1,92 @@
+\section{life\+:\+:Color Struct Reference}
+\label{structlife_1_1_color}\index{life\+::\+Color@{life\+::\+Color}}
+
+
+Representa uma cor como um conjunto de dados representando os canais R, G e B.  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \textbf{ channel\+\_\+e} \+: color\+\_\+t \{ \textbf{ R} =0, 
+\textbf{ G} =1, 
+\textbf{ B} =2
+ \}\begin{DoxyCompactList}\small\item\em Identifica cada uma das 3 cores. \end{DoxyCompactList}
+\item 
+typedef unsigned char \textbf{ color\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structlife_1_1_color_a828b52fdeb6cea04ae182dea36272538}} 
+\textbf{ Color} (\textbf{ color\+\_\+t} r=0, \textbf{ color\+\_\+t} g=0, \textbf{ color\+\_\+t} b=0)
+\begin{DoxyCompactList}\small\item\em Cria uma cor. \end{DoxyCompactList}\item 
+\mbox{\label{structlife_1_1_color_a4c5b4ec3378b240824d16ae0e7870b44}} 
+\textbf{ Color} (const \textbf{ Color} \&clone)
+\begin{DoxyCompactList}\small\item\em Construtor copia. \end{DoxyCompactList}\item 
+\mbox{\label{structlife_1_1_color_a36338f7acd471d208faeffae1e24bcf2}} 
+\textbf{ Color} \& \textbf{ operator=} (const \textbf{ Color} \&rhs)
+\begin{DoxyCompactList}\small\item\em Operador de igualdade. \end{DoxyCompactList}\item 
+\mbox{\label{structlife_1_1_color_a5c68002aa56cf5932c14ff2f1bf7f24b}} 
+bool \textbf{ operator==} (const \textbf{ Color} \&rhs)
+\begin{DoxyCompactList}\small\item\em Operador de comparação. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structlife_1_1_color_acbb18a06aeb0d05c8e9477a25fbd32bf}} 
+\textbf{ color\+\_\+t} \textbf{ channels} [3]
+\begin{DoxyCompactList}\small\item\em Armazena cada um dos 3 canais de cores. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{structlife_1_1_color_afdfe1a75bd9930a51707d642a7a4afcd}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \textbf{ Color} \&c)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa uma cor como um conjunto de dados representando os canais R, G e B. 
+
+\subsection{Member Typedef Documentation}
+\mbox{\label{structlife_1_1_color_ab392ce7ebd8204f1447c7e296dde9a17}} 
+\index{life\+::\+Color@{life\+::\+Color}!color\+\_\+t@{color\+\_\+t}}
+\index{color\+\_\+t@{color\+\_\+t}!life\+::\+Color@{life\+::\+Color}}
+\subsubsection{color\+\_\+t}
+{\footnotesize\ttfamily typedef unsigned char \textbf{ life\+::\+Color\+::color\+\_\+t}}
+
+Type of a color channel. 
+
+\subsection{Member Enumeration Documentation}
+\mbox{\label{structlife_1_1_color_a56dfdd352118c14f349c4372fd88b251}} 
+\index{life\+::\+Color@{life\+::\+Color}!channel\+\_\+e@{channel\+\_\+e}}
+\index{channel\+\_\+e@{channel\+\_\+e}!life\+::\+Color@{life\+::\+Color}}
+\subsubsection{channel\+\_\+e}
+{\footnotesize\ttfamily enum \textbf{ life\+::\+Color\+::channel\+\_\+e} \+: \textbf{ color\+\_\+t}}
+
+
+
+Identifica cada uma das 3 cores. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{R@{R}!life\+::\+Color@{life\+::\+Color}}\index{life\+::\+Color@{life\+::\+Color}!R@{R}}}\mbox{\label{structlife_1_1_color_a56dfdd352118c14f349c4372fd88b251a2f9a624ff5fcc33b32f5b052ec6bd8fa}} 
+R&Red channel. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{G@{G}!life\+::\+Color@{life\+::\+Color}}\index{life\+::\+Color@{life\+::\+Color}!G@{G}}}\mbox{\label{structlife_1_1_color_a56dfdd352118c14f349c4372fd88b251a8f6ff03cddf2c906ead096a35e8f4b99}} 
+G&Green channel. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{B@{B}!life\+::\+Color@{life\+::\+Color}}\index{life\+::\+Color@{life\+::\+Color}!B@{B}}}\mbox{\label{structlife_1_1_color_a56dfdd352118c14f349c4372fd88b251a237cdb09f2b260974329d5c673595657}} 
+B&Blue channel. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/elexandro/\+Documentos/\+Project\+Life/include/common.\+h\end{DoxyCompactItemize}

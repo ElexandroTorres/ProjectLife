@@ -1,0 +1,118 @@
+\section{Canvas Class Reference}
+\label{class_canvas}\index{Canvas@{Canvas}}
+
+
+Representa um conjunto de pixel a modo de formar uma imagem.  
+
+
+
+
+{\ttfamily \#include $<$canvas.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Canvas} (size\+\_\+t width\+\_\+, size\+\_\+t height\+\_\+, short block\+\_\+s, const std\+::string \&color)
+\item 
+\textbf{ $\sim$\+Canvas} ()
+\item 
+void \textbf{ preencher\+\_\+pixels} (const std\+::string \&color)
+\item 
+size\+\_\+t \textbf{ get\+\_\+width} (void) const
+\item 
+size\+\_\+t \textbf{ get\+\_\+height} (void) const
+\item 
+void \textbf{ set\+\_\+pixel} (int x, int y, const std\+::string \&color)
+\item 
+const byte $\ast$ \textbf{ pixels} (void) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa um conjunto de pixel a modo de formar uma imagem. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_canvas_ac6561227188fd9b2488a3203ea10a48b}} 
+\index{Canvas@{Canvas}!Canvas@{Canvas}}
+\index{Canvas@{Canvas}!Canvas@{Canvas}}
+\subsubsection{Canvas()}
+{\footnotesize\ttfamily Canvas\+::\+Canvas (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{width\+\_\+,  }\item[{size\+\_\+t}]{height\+\_\+,  }\item[{short}]{block\+\_\+s,  }\item[{const std\+::string \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construtor padrão. 
+\begin{DoxyParams}{Parameters}
+{\em width\+\_\+} & Largura da matriz de pixels. \\
+\hline
+{\em height\+\_\+} & Altura da matriz de pixels. \\
+\hline
+{\em block\+\_\+s} & Tamanho do bloco que representará um pixel. \\
+\hline
+{\em color} & Cor que todos os pixels terão. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_canvas_a237c4549ad2e27c729cd1f71e89f0fd9}} 
+\index{Canvas@{Canvas}!````~Canvas@{$\sim$\+Canvas}}
+\index{````~Canvas@{$\sim$\+Canvas}!Canvas@{Canvas}}
+\subsubsection{$\sim$\+Canvas()}
+{\footnotesize\ttfamily Canvas\+::$\sim$\+Canvas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Destrutor. 
+
+\subsection{Member Function Documentation}
+\mbox{\label{class_canvas_ad16ad0414986abb7c9ea48c1f008d963}} 
+\index{Canvas@{Canvas}!get\+\_\+height@{get\+\_\+height}}
+\index{get\+\_\+height@{get\+\_\+height}!Canvas@{Canvas}}
+\subsubsection{get\+\_\+height()}
+{\footnotesize\ttfamily size\+\_\+t Canvas\+::get\+\_\+height (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+A altura do canvas. 
+\end{DoxyReturn}
+\mbox{\label{class_canvas_a11eaf4139533b74874916bb17051b197}} 
+\index{Canvas@{Canvas}!get\+\_\+width@{get\+\_\+width}}
+\index{get\+\_\+width@{get\+\_\+width}!Canvas@{Canvas}}
+\subsubsection{get\+\_\+width()}
+{\footnotesize\ttfamily size\+\_\+t Canvas\+::get\+\_\+width (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+A largura do canvas. 
+\end{DoxyReturn}
+\mbox{\label{class_canvas_ae12797921c597c32270bfa6e51930031}} 
+\index{Canvas@{Canvas}!pixels@{pixels}}
+\index{pixels@{pixels}!Canvas@{Canvas}}
+\subsubsection{pixels()}
+{\footnotesize\ttfamily const byte$\ast$ Canvas\+::pixels (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+A lista de pixels do canvas. 
+\end{DoxyReturn}
+\mbox{\label{class_canvas_a6c806351e8eac47b0b3da8fec7085094}} 
+\index{Canvas@{Canvas}!preencher\+\_\+pixels@{preencher\+\_\+pixels}}
+\index{preencher\+\_\+pixels@{preencher\+\_\+pixels}!Canvas@{Canvas}}
+\subsubsection{preencher\+\_\+pixels()}
+{\footnotesize\ttfamily void Canvas\+::preencher\+\_\+pixels (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Preenche todas os pixels do canvas com uma unica cor. 
+\begin{DoxyParams}{Parameters}
+{\em color} & Cor que irá preencher todos os pixels. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_canvas_a90dfde39fc22f8e0bd2cea7ce5b7b40f}} 
+\index{Canvas@{Canvas}!set\+\_\+pixel@{set\+\_\+pixel}}
+\index{set\+\_\+pixel@{set\+\_\+pixel}!Canvas@{Canvas}}
+\subsubsection{set\+\_\+pixel()}
+{\footnotesize\ttfamily void Canvas\+::set\+\_\+pixel (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const std\+::string \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Define a cor de um determinado pixel para uma determinada cor. 
+\begin{DoxyParams}{Parameters}
+{\em x} & Coordenada x do pixel. \\
+\hline
+{\em y} & Coordenada y do pixel. \\
+\hline
+{\em color} & Cor a qual o pixel será pintado. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/elexandro/\+Documentos/\+Project\+Life/include/canvas.\+h\end{DoxyCompactItemize}

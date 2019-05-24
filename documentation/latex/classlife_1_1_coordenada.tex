@@ -1,0 +1,89 @@
+\section{life\+:\+:Coordenada Class Reference}
+\label{classlife_1_1_coordenada}\index{life\+::\+Coordenada@{life\+::\+Coordenada}}
+
+
+Representa a coordenada de um pixel.  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Coordenada} (coord\+\_\+type x=0, coord\+\_\+type y=0)
+\item 
+\mbox{\label{classlife_1_1_coordenada_a7304ae12752ce1244c8af792d39ba67f}} 
+\textbf{ Coordenada} (const \textbf{ Coordenada} \&clone)
+\begin{DoxyCompactList}\small\item\em Construtor copia. \end{DoxyCompactList}\item 
+\mbox{\label{classlife_1_1_coordenada_a84dcd22b361e283b2db2bd238fbbd9af}} 
+\textbf{ $\sim$\+Coordenada} ()=default
+\begin{DoxyCompactList}\small\item\em Destrutor. \end{DoxyCompactList}\item 
+coord\+\_\+type \textbf{ get\+\_\+x} ()
+\item 
+coord\+\_\+type \textbf{ get\+\_\+y} ()
+\item 
+\mbox{\label{classlife_1_1_coordenada_a6c49c30e2263710f83a37c3a3c00d55c}} 
+bool \textbf{ operator==} (const \textbf{ Coordenada} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Sobrecarga de igualdade. \end{DoxyCompactList}\item 
+\mbox{\label{classlife_1_1_coordenada_a41fd1ee3173ede7428fee4d85f999d34}} 
+bool \textbf{ operator!=} (const \textbf{ Coordenada} \&rhs) const
+\begin{DoxyCompactList}\small\item\em Sobrecarga de diferença.. \end{DoxyCompactList}\item 
+\mbox{\label{classlife_1_1_coordenada_a6a6b65ae12b925ae43d25bc1aba81b2a}} 
+\textbf{ Coordenada} \textbf{ operator-\/-\/} ()
+\begin{DoxyCompactList}\small\item\em Decrement the point. \end{DoxyCompactList}\item 
+\mbox{\label{classlife_1_1_coordenada_a9509f7ec78be24df42bccd25c1d24950}} 
+\textbf{ Coordenada} {\bfseries operator-\/-\/} (int)
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\label{classlife_1_1_coordenada_a05e1b26bc1a6790bbd7e439aeced9c96}} 
+std\+::ostream \& \textbf{ operator$<$$<$} (std\+::ostream \&os, const \textbf{ Coordenada} \&p)
+\begin{DoxyCompactList}\small\item\em Stream extractor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa a coordenada de um pixel. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{classlife_1_1_coordenada_ab3882150b7434bc5cded41ce66e1e9aa}} 
+\index{life\+::\+Coordenada@{life\+::\+Coordenada}!Coordenada@{Coordenada}}
+\index{Coordenada@{Coordenada}!life\+::\+Coordenada@{life\+::\+Coordenada}}
+\subsubsection{Coordenada()}
+{\footnotesize\ttfamily life\+::\+Coordenada\+::\+Coordenada (\begin{DoxyParamCaption}\item[{coord\+\_\+type}]{x = {\ttfamily 0},  }\item[{coord\+\_\+type}]{y = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Cria uma coordenada. 
+\begin{DoxyParams}{Parameters}
+{\em x} & representa o x da coordenada. \\
+\hline
+{\em y} & representa o y da coordenada. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{classlife_1_1_coordenada_af10876c5a390bed633c43018f9ee1b73}} 
+\index{life\+::\+Coordenada@{life\+::\+Coordenada}!get\+\_\+x@{get\+\_\+x}}
+\index{get\+\_\+x@{get\+\_\+x}!life\+::\+Coordenada@{life\+::\+Coordenada}}
+\subsubsection{get\+\_\+x()}
+{\footnotesize\ttfamily coord\+\_\+type life\+::\+Coordenada\+::get\+\_\+x (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+O x da coordenada solicitada. 
+\end{DoxyReturn}
+\mbox{\label{classlife_1_1_coordenada_a9b7093bde062c991ae3271b773a1a814}} 
+\index{life\+::\+Coordenada@{life\+::\+Coordenada}!get\+\_\+y@{get\+\_\+y}}
+\index{get\+\_\+y@{get\+\_\+y}!life\+::\+Coordenada@{life\+::\+Coordenada}}
+\subsubsection{get\+\_\+y()}
+{\footnotesize\ttfamily coord\+\_\+type life\+::\+Coordenada\+::get\+\_\+y (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+O y da coordenada solicitada. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/elexandro/\+Documentos/\+Project\+Life/include/common.\+h\end{DoxyCompactItemize}

@@ -22,13 +22,17 @@ bool isValidNumber(const std::string number) {
  * @param width, Largura da imagem.
  * @param height, Altura da imagem.
 */
-void encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
+bool encode_png(const std::string filename/*const char* filename*/, const unsigned char * image, unsigned width, unsigned height) {
     //Encode the image
     unsigned error = lodepng::encode(filename, image, width, height);
+    
     //if there's an error, display it
-    if(error) std::cout << "encoder error " << error << ": "<< lodepng_error_text(error) << std::endl;
+    if(error) {
+    	std::cout << "Unable to generate image. Verify if the directory you entered is valid\n";	
+    	return false;
+    }
+    return true;	
 }
-
 
 /* Classe Life*/
 
@@ -41,10 +45,15 @@ void Life::print() {
 		std::cout << "| ";
 		for(int i = 0; i < m_width; i++) {
 			if(cells[i + m_width * j].is_alive()) {
-				std::cout << "*";
+				std::cout << m_alive;
 			}
 			else {
-				std::cout << " ";	
+				if(m_alive == ' ') { // Se o vivo for representado por espaço em branco(vai saber né?!...).
+					std::cout << ".";
+				}
+				else {
+					std::cout << " ";		
+				}
 			}
 		}
 		std::cout << " |\n";
@@ -60,24 +69,55 @@ void Life::print_file() {
 		outfile << "| ";
 		for(int i = 0; i < m_width; i++) {
 			if(cells[i + m_width * j].is_alive()) {
-				outfile << "*";
+				outfile << m_alive;
 			}
 			else {
-				outfile << " ";	
+				if(m_alive == ' ') { 
+					outfile << ".";
+				}
+				else {
+					outfile << " ";		
+				}
 			}
 		}
 		outfile << " |\n";
 	}
 }
+bool Life::generate_image() {
+	std::string filename;
+	// Definir o nome do arquivo como sendo Generation + numero da geração.
+	// Caso o diretorio de imagens tenha sido especificado.
+	
+	filename = m_imagesDirectory + "/Generation " + std::to_string(m_currentGeneration);
+	Canvas img(m_width, m_height, m_blockSize, m_backgroundColor);
+	// Pintar as células vivas na imagem.
+	for(auto i = 0u; i < liveCells.size(); i++) {
+		img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , m_aliveColor);
+	}
+	// Gerar a imagem no formato png.
+	return encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
+	// Incrementa a geração atual.
+}
 /*
  * Carrega as configurações passadas no arquivo.
  * @param arquivo, arquivo de configuração.
 */
-void Life::carregar_configuracoes(std::fstream &config) {
-	config >> m_height; // Ler o numero de linhas(altura) da "imagem".
-	config >> m_width; // Ler o numero de colunas(largura) da "imagem".
+bool Life::carregar_configuracoes(std::fstream &config) {
+	std::string width_;
+	std::string height_;
+	config >> height_;
+	config >> width_;
+	// Verificar se as dimenções informadas no arquivo de configuração são validas.
+	if(isValidNumber(height_) and isValidNumber(width_)) {
+		m_height = std::stoi(height_);
+		m_width = std::stoi(width_);	
+	}
+	else {
+		std::cout << "Dimensions entered in the configuration file are invalid.\n";
+		return false;
+	}
 	config >> m_alive; // Ler o caractere que irá representar uma celula viva.
-	
+	// Se alguma das dimenções não for um numero valido, o programa será encerrado.
 	cells.resize(m_height*m_width); // Redefine o tamanho de cells para armazenar todos as células.
 	cellsCopy.resize(m_height*m_width); // Redefine o tamanho da copia.
 	//Varre todo o arquivo em busca das celulas vivas e mortas e redefine seu estado.
@@ -97,6 +137,7 @@ void Life::carregar_configuracoes(std::fstream &config) {
 		}
 		row++;
 	}
+	return true;
 }
 /*
  * Valida os argumentos passados pela linha de comando, retornando falso caso não sejam validos ou insuficientes.
@@ -146,12 +187,13 @@ bool Life::validar_argumentos(void) {
 			
 		}
 		else if(m_argv[i] == "--fps") {
+			i++;
 			// Verificar se o argumento seguinte é um numero valido.
-			if(isValidNumber(m_argv[++i])) {
+			if(isValidNumber(m_argv[i]) and std::stoi(m_argv[i]) > 0) {
 				m_fps = std::stoi(m_argv[i]);
 			}
 			else {
-				std::cout << m_argv[i] << " it's not a valid number. Use --help to see the valid options.\n";
+				std::cout << m_argv[i] << " it's not a valid number. fps must be greater than 0(zero).\n";
 				return false;
 			}
 		}
@@ -208,7 +250,10 @@ bool Life::validar_argumentos(void) {
 			std::fstream config(m_argv[i]);
 			// Verificar se foi possivel abrir o arquivo.
 			if(config.is_open()) { 
-				carregar_configuracoes(config);
+				if(!carregar_configuracoes(config)) {
+					config.close();
+					return false;
+				}
 				config.close();
 			}
 			else {
@@ -220,7 +265,6 @@ bool Life::validar_argumentos(void) {
 	
 	return true;
 }
-
 /*
  * Verifica quantos vizinhos a célula tem.
  * @param i, Coluna onde está a célula.
@@ -338,29 +382,7 @@ void Life::process_simulation() {
 	}
 
 	cells = cellsCopy;
-	/* Verifica qual o modo de saida desejado para as gerações. */
-	std::string filename;
-	// Definir o nome do arquivo como sendo Generation + numero da geração.
-	// Caso o diretorio de imagens tenha sido especificado.
-	if(m_imagesDirectory != "none") {
-		filename = m_imagesDirectory + "/Generation " + std::to_string(m_currentGeneration);
-		Canvas img(m_width, m_height, 10, m_backgroundColor);
-		// Pintar as células vivas na imagem.
-		for(auto i = 0u; i < liveCells.size(); i++) {
-			img.set_pixel(liveCells[i].get_x(), liveCells[i].get_y() , m_aliveColor);
-		}
-		// Gerar a imagem no formato png.
-		encode_png(filename + ".png", img.pixels(), (unsigned) img.get_width(), (unsigned) img.get_height());	
-		// Incrementa a geração atual.
-	}
-	// Caso um arquivo de texto de saida tenha sido especificado.
-	if(m_outfileName != "none") {
-		print_file();
-	}
-	if(m_imagesDirectory == "none") {
-		print();
-	}
-	m_currentGeneration++;
+	
 	
 }
 /*
@@ -397,7 +419,19 @@ bool Life::start(void) {
 	if(!validar_argumentos()) {
 		return false;
 	}
+	std::cout << "-----------------------------------------------------------------";
+	std::cout << "\n-Configuration file is valid.";
+	std::cout << "\n-----------------------------------------------------------------\n";
 	//caso os argumentos sejam validados exibir mensagem de boas vindas.
+	std::cout << " Welcome to Conway’s game of Life.\n";
+	std::cout << " Running a simulation on a grid with " << m_height << " lines and " << m_width << " columns.\n";
+	std::cout << " each cell can either be occupied by an organism or not.\n";
+	std::cout << " The occupied cells change from generation to generation\n";
+	std::cout << " according to the number of neighboring cells which are alive.\n";
+	std::cout << "-----------------------------------------------------------------\n\n";
+	std::cout << "Starting Life simulation...\n";
+	std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+	
 	return true;	
 }
 
@@ -409,20 +443,45 @@ bool Life::end_simulation() {
 	/* Executa a geração de acordo com a quantidade especificada pelo usuario, caso não tenha sido especificado
 	as gerações irão continuar até atigingir uma das condições de finalização: Estabilidade ou extinção. */
 	if(m_maxGen != 0) {
+		/* Verifica qual o modo de saida desejado para as gerações em texto. */
+		if(m_outfileName != "none") {
+			print_file();
+		}
+		if(m_imagesDirectory == "none") {
+			print();
+			std::this_thread::sleep_for(std::chrono::milliseconds(1000/m_fps));
+		}
 		process_simulation(); // Processa as informações da simulação.
+		/* Verifica se será gerado imagens da simulação. */
+		if(m_imagesDirectory != "none") {
+			if(!generate_image()) {
+				return true; //encessa a simulação.
+			}
+			if(m_currentGeneration  == 1) {
+				std::cout << "Generating images...\n";		
+			}
+			//std::cerr << m_currentGeneration << " ";
+			//std::cerr << std::string(100, '\n');
+			
+		}
+
+		m_currentGeneration++; // Incrementa o numero da geração atual.
+
 		// Verifica se é estavel e finaliza caso seja.
 		if(is_stable()) {
 			return true;
 		}
+		// Verifica se é extinta.
 		if(is_extinguished()) {
 			return true;
 		}
+
 		m_maxGen--;	
+
 		return false; //simulação não terminou.	
 	}
 	return true; //Simulação acabou
 }
 
-
-
+/* Fim da Classe Life */
 

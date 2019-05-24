@@ -1,0 +1,193 @@
+\section{Life Class Reference}
+\label{class_life}\index{Life@{Life}}
+
+
+Representa a simulação life.  
+
+
+
+
+{\ttfamily \#include $<$life.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Life} (int argc, const char $\ast$argv[$\,$])
+\item 
+\textbf{ $\sim$\+Life} ()=default
+\item 
+void \textbf{ print} ()
+\item 
+void \textbf{ print\+\_\+file} ()
+\item 
+bool \textbf{ generate\+\_\+image} ()
+\item 
+bool \textbf{ carregar\+\_\+configuracoes} (std\+::fstream \&config)
+\item 
+bool \textbf{ validar\+\_\+argumentos} (void)
+\item 
+short \textbf{ check\+\_\+neighbors} (int i, int j)
+\item 
+void \textbf{ update\+\_\+live\+Cells} (std\+::vector$<$ \textbf{ life\+::\+Cell} $>$ \&c)
+\item 
+void \textbf{ save\+\_\+generations} ()
+\item 
+void \textbf{ process\+\_\+simulation} ()
+\item 
+bool \textbf{ is\+\_\+stable} ()
+\item 
+bool \textbf{ is\+\_\+extinguished} ()
+\item 
+bool \textbf{ start} (void)
+\item 
+bool \textbf{ end\+\_\+simulation} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa a simulação life. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_life_a41479e494373b89882a604f7773c69ba}} 
+\index{Life@{Life}!Life@{Life}}
+\index{Life@{Life}!Life@{Life}}
+\subsubsection{Life()}
+{\footnotesize\ttfamily Life\+::\+Life (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{const char $\ast$}]{argv[$\,$] }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construtor padrão. 
+\begin{DoxyParams}{Parameters}
+{\em argc} & quantidade de argumentos passados por linha de comando. \\
+\hline
+{\em argv} & lista de argumentos passados por linha de comando. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_life_ab37ae74b41b2bc3467d9596e42081bc9}} 
+\index{Life@{Life}!````~Life@{$\sim$\+Life}}
+\index{````~Life@{$\sim$\+Life}!Life@{Life}}
+\subsubsection{$\sim$\+Life()}
+{\footnotesize\ttfamily Life\+::$\sim$\+Life (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Destrutor padrão. 
+
+\subsection{Member Function Documentation}
+\mbox{\label{class_life_a31d469adc94d3834453ea8f278e02534}} 
+\index{Life@{Life}!carregar\+\_\+configuracoes@{carregar\+\_\+configuracoes}}
+\index{carregar\+\_\+configuracoes@{carregar\+\_\+configuracoes}!Life@{Life}}
+\subsubsection{carregar\+\_\+configuracoes()}
+{\footnotesize\ttfamily bool Life\+::carregar\+\_\+configuracoes (\begin{DoxyParamCaption}\item[{std\+::fstream \&}]{config }\end{DoxyParamCaption})}
+
+Carrega as configurações passadas no arquivo. 
+\begin{DoxyParams}{Parameters}
+{\em config} & Arquivo de configuração. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_life_a839cc897ab42c2bc795f53011127b32f}} 
+\index{Life@{Life}!check\+\_\+neighbors@{check\+\_\+neighbors}}
+\index{check\+\_\+neighbors@{check\+\_\+neighbors}!Life@{Life}}
+\subsubsection{check\+\_\+neighbors()}
+{\footnotesize\ttfamily short Life\+::check\+\_\+neighbors (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
+
+Verifica quantos vizinhos a célula tem. 
+\begin{DoxyParams}{Parameters}
+{\em i} & Coluna onde está a célula. \\
+\hline
+{\em j} & linha onde está a célula. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+O numero de vizinhos da célula. 
+\end{DoxyReturn}
+\mbox{\label{class_life_acd418ca066af49070b3b21c3e1352bfd}} 
+\index{Life@{Life}!end\+\_\+simulation@{end\+\_\+simulation}}
+\index{end\+\_\+simulation@{end\+\_\+simulation}!Life@{Life}}
+\subsubsection{end\+\_\+simulation()}
+{\footnotesize\ttfamily bool Life\+::end\+\_\+simulation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Verifica se a simulação deve finalizar. \begin{DoxyReturn}{Returns}
+true caso a simulação seja finalizada e false caso contrario. 
+\end{DoxyReturn}
+\mbox{\label{class_life_af1481fc5bc8a7efd7e953af6a4fa8c8a}} 
+\index{Life@{Life}!generate\+\_\+image@{generate\+\_\+image}}
+\index{generate\+\_\+image@{generate\+\_\+image}!Life@{Life}}
+\subsubsection{generate\+\_\+image()}
+{\footnotesize\ttfamily bool Life\+::generate\+\_\+image (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Gera uma imagem das celulas. \begin{DoxyReturn}{Returns}
+False caso não seja possivel gerar a imagem no diretorio informado. 
+\end{DoxyReturn}
+\mbox{\label{class_life_a899b47868b05b388ae320cf4ad34ac50}} 
+\index{Life@{Life}!is\+\_\+extinguished@{is\+\_\+extinguished}}
+\index{is\+\_\+extinguished@{is\+\_\+extinguished}!Life@{Life}}
+\subsubsection{is\+\_\+extinguished()}
+{\footnotesize\ttfamily bool Life\+::is\+\_\+extinguished (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Verifica se a geração é extinta. Ou seja, não existe nenhuma célula viva. \begin{DoxyReturn}{Returns}
+true caso seja extinta e false caso contrario. 
+\end{DoxyReturn}
+\mbox{\label{class_life_a773454947fcc1f7c576c8749647d9ba2}} 
+\index{Life@{Life}!is\+\_\+stable@{is\+\_\+stable}}
+\index{is\+\_\+stable@{is\+\_\+stable}!Life@{Life}}
+\subsubsection{is\+\_\+stable()}
+{\footnotesize\ttfamily bool Life\+::is\+\_\+stable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Verifica se a geração é estavél. Ou seja, existe outra geração no passado que foi igual a ela. \begin{DoxyReturn}{Returns}
+true caso sejá estavél e false caso contrario. 
+\end{DoxyReturn}
+\mbox{\label{class_life_a502bd46fefb24950e64865ce87c4b670}} 
+\index{Life@{Life}!print@{print}}
+\index{print@{print}!Life@{Life}}
+\subsubsection{print()}
+{\footnotesize\ttfamily void Life\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Imprime a matriz de células na saida padrão. \mbox{\label{class_life_afc6f2d0b5b7c893fcf2c20265c622f31}} 
+\index{Life@{Life}!print\+\_\+file@{print\+\_\+file}}
+\index{print\+\_\+file@{print\+\_\+file}!Life@{Life}}
+\subsubsection{print\+\_\+file()}
+{\footnotesize\ttfamily void Life\+::print\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Imprime a matriz de células em um arquivo. \mbox{\label{class_life_a81e831a5bb2c598aebdb03677d38652f}} 
+\index{Life@{Life}!process\+\_\+simulation@{process\+\_\+simulation}}
+\index{process\+\_\+simulation@{process\+\_\+simulation}!Life@{Life}}
+\subsubsection{process\+\_\+simulation()}
+{\footnotesize\ttfamily void Life\+::process\+\_\+simulation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Processa a simulação de acordo com as regras do jogo da vida. \mbox{\label{class_life_a59ad6fe5f50a3ae34c6c2ac204d78d71}} 
+\index{Life@{Life}!save\+\_\+generations@{save\+\_\+generations}}
+\index{save\+\_\+generations@{save\+\_\+generations}!Life@{Life}}
+\subsubsection{save\+\_\+generations()}
+{\footnotesize\ttfamily void Life\+::save\+\_\+generations (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Salva a lista de células vivas em uma lista de gerações. As gerações são adicionadas de acordo com sua ordem. \mbox{\label{class_life_ad81f7d9486741c90b9e38f5f3216f322}} 
+\index{Life@{Life}!start@{start}}
+\index{start@{start}!Life@{Life}}
+\subsubsection{start()}
+{\footnotesize\ttfamily bool Life\+::start (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Valida os argumentos passados na linha de comando e imprime a mensagem de boas vindas. Finaliza a simulação caso eles sejam invalidos. \begin{DoxyReturn}{Returns}
+true caso todos os asgumentos sejam validados e false caso contrario. 
+\end{DoxyReturn}
+\mbox{\label{class_life_a015b3c5474f1834d5fbc61636a14bf09}} 
+\index{Life@{Life}!update\+\_\+live\+Cells@{update\+\_\+live\+Cells}}
+\index{update\+\_\+live\+Cells@{update\+\_\+live\+Cells}!Life@{Life}}
+\subsubsection{update\+\_\+live\+Cells()}
+{\footnotesize\ttfamily void Life\+::update\+\_\+live\+Cells (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \textbf{ life\+::\+Cell} $>$ \&}]{c }\end{DoxyParamCaption})}
+
+Atualiza a lista de células vivas. 
+\begin{DoxyParams}{Parameters}
+{\em Lista} & de células. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{class_life_ad74154245ad61d600ef15a245dfa918d}} 
+\index{Life@{Life}!validar\+\_\+argumentos@{validar\+\_\+argumentos}}
+\index{validar\+\_\+argumentos@{validar\+\_\+argumentos}!Life@{Life}}
+\subsubsection{validar\+\_\+argumentos()}
+{\footnotesize\ttfamily bool Life\+::validar\+\_\+argumentos (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Valida os argumentos passados pela linha de comando, retornando falso caso não sejam validos ou insuficientes. \begin{DoxyReturn}{Returns}
+true caso todos os argumentos sejam validados e false caso contrario. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/elexandro/\+Documentos/\+Project\+Life/include/life.\+h\end{DoxyCompactItemize}

@@ -3,8 +3,8 @@
 
 CMakeFiles/glife.dir/src/life.cpp.o: ../include/canvas.h
 CMakeFiles/glife.dir/src/life.cpp.o: ../include/common.h
-CMakeFiles/glife.dir/src/life.cpp.o: ../include/lodepng.h
 CMakeFiles/glife.dir/src/life.cpp.o: ../include/life.h
+CMakeFiles/glife.dir/src/life.cpp.o: ../include/lodepng.h
 CMakeFiles/glife.dir/src/life.cpp.o: ../src/life.cpp
 
 CMakeFiles/glife.dir/src/lodepng.cpp.o: ../include/lodepng.h
@@ -12,7 +12,7 @@ CMakeFiles/glife.dir/src/lodepng.cpp.o: ../src/lodepng.cpp
 
 CMakeFiles/glife.dir/src/main.cpp.o: ../include/canvas.h
 CMakeFiles/glife.dir/src/main.cpp.o: ../include/common.h
-CMakeFiles/glife.dir/src/main.cpp.o: ../include/lodepng.h
 CMakeFiles/glife.dir/src/main.cpp.o: ../include/life.h
+CMakeFiles/glife.dir/src/main.cpp.o: ../include/lodepng.h
 CMakeFiles/glife.dir/src/main.cpp.o: ../src/main.cpp
 

@@ -1,0 +1,121 @@
+\section{life\+:\+:Cell Class Reference}
+\label{classlife_1_1_cell}\index{life\+::\+Cell@{life\+::\+Cell}}
+
+
+Representa uma célula do life.  
+
+
+
+
+{\ttfamily \#include $<$common.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\textbf{ Cell} (bool alive=false)
+\item 
+\textbf{ Cell} (const \textbf{ Cell} \&clone)
+\item 
+\textbf{ $\sim$\+Cell} ()=default
+\item 
+void \textbf{ set\+\_\+state} (bool state)
+\item 
+bool \textbf{ is\+\_\+alive} ()
+\item 
+void \textbf{ kill} ()
+\item 
+void \textbf{ born} ()
+\item 
+void \textbf{ set\+\_\+neighbors} (short n)
+\item 
+short \textbf{ neighbors} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Representa uma célula do life. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{classlife_1_1_cell_ad7fca63a990ce5bf6fee5a4500c65e06}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!Cell@{Cell}}
+\index{Cell@{Cell}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{Cell()\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily life\+::\+Cell\+::\+Cell (\begin{DoxyParamCaption}\item[{bool}]{alive = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construtor padrão, inicializando a célula como morta. 
+\begin{DoxyParams}{Parameters}
+{\em alive} & Booleano que define o estado da célula. Padrão = false. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classlife_1_1_cell_aa47ada7e79eacb69220f6a34f28aa1b8}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!Cell@{Cell}}
+\index{Cell@{Cell}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{Cell()\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily life\+::\+Cell\+::\+Cell (\begin{DoxyParamCaption}\item[{const \textbf{ Cell} \&}]{clone }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Construtor copia. \mbox{\label{classlife_1_1_cell_ab76efa32046ec61a166c6f3f5149d9eb}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!````~Cell@{$\sim$\+Cell}}
+\index{````~Cell@{$\sim$\+Cell}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{$\sim$\+Cell()}
+{\footnotesize\ttfamily life\+::\+Cell\+::$\sim$\+Cell (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+Destrutor padrão. 
+
+\subsection{Member Function Documentation}
+\mbox{\label{classlife_1_1_cell_aab0dd5c1038bbe0be1d89b48e31ca4b1}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!born@{born}}
+\index{born@{born}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{born()}
+{\footnotesize\ttfamily void life\+::\+Cell\+::born (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Faz \char`\"{}nascer\char`\"{} uma célula definindo seu estado para true. \mbox{\label{classlife_1_1_cell_a5e7ef7bb158b50e5933e1f90e996117b}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!is\+\_\+alive@{is\+\_\+alive}}
+\index{is\+\_\+alive@{is\+\_\+alive}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{is\+\_\+alive()}
+{\footnotesize\ttfamily bool life\+::\+Cell\+::is\+\_\+alive (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Verifica se a célula está viva. \begin{DoxyReturn}{Returns}
+true caso esteja viva e false caso contrario. 
+\end{DoxyReturn}
+\mbox{\label{classlife_1_1_cell_a316d674703ad1821adccc9a897312a16}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!kill@{kill}}
+\index{kill@{kill}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{kill()}
+{\footnotesize\ttfamily void life\+::\+Cell\+::kill (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\char`\"{}\+Mata\char`\"{} a célula definindo seu estado para false. \mbox{\label{classlife_1_1_cell_a9a1725f5da950d7361b685e3f4fac069}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!neighbors@{neighbors}}
+\index{neighbors@{neighbors}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{neighbors()}
+{\footnotesize\ttfamily short life\+::\+Cell\+::neighbors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Retorna o numero de vizinhos vivos da célula. \begin{DoxyReturn}{Returns}
+Quantidade de vizinhos vivos. 
+\end{DoxyReturn}
+\mbox{\label{classlife_1_1_cell_a6c974500faca328ea0c92f804f8cff69}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!set\+\_\+neighbors@{set\+\_\+neighbors}}
+\index{set\+\_\+neighbors@{set\+\_\+neighbors}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{set\+\_\+neighbors()}
+{\footnotesize\ttfamily void life\+::\+Cell\+::set\+\_\+neighbors (\begin{DoxyParamCaption}\item[{short}]{n }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Define a quantidade de vizinhos vivos da célula. 
+\begin{DoxyParams}{Parameters}
+{\em n} & Numero de vizinhos vivos. \\
+\hline
+\end{DoxyParams}
+\mbox{\label{classlife_1_1_cell_ae41c98886125c6cd720a1799f57ba9e1}} 
+\index{life\+::\+Cell@{life\+::\+Cell}!set\+\_\+state@{set\+\_\+state}}
+\index{set\+\_\+state@{set\+\_\+state}!life\+::\+Cell@{life\+::\+Cell}}
+\subsubsection{set\+\_\+state()}
+{\footnotesize\ttfamily void life\+::\+Cell\+::set\+\_\+state (\begin{DoxyParamCaption}\item[{bool}]{state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Atribui um estado para a celula. 
+\begin{DoxyParams}{Parameters}
+{\em state} & Booleano representado o estado da célula. True para viva e false para morta. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/elexandro/\+Documentos/\+Project\+Life/include/common.\+h\end{DoxyCompactItemize}

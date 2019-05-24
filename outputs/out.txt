@@ -1,0 +1,1211 @@
+Game of life: 
+Generation 1:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                             v  v                                                     |
+|                                             vvvv                                                     |
+|                                            v    v                                                    |
+|                                            v vv v                                                    |
+|                                            v    v                                                    |
+|                                             vvvv                                                     |
+|                                                                                                      |
+|               vv vv                                     v  v                                         |
+|               vv vv                                     vvvv                                         |
+|                v v                                     v    v                                        |
+|              v v v v                                   v vv v                                        |
+|              v v v v                                   v    v                                        |
+|              vv   vv                                    vvvv                                         |
+|                                                                                                      |
+|                                                                                                      |
+|                                                         v  v                                         |
+|                           vv vv                         vvvv                                         |
+|                           vv vv                        v    v                                        |
+|                            v v                         v vv v                                        |
+|                          v v v v                       v    v                                        |
+|                          v v v v                        vvvv                                         |
+|                          vv   vv                                                                     |
+|                                                                                                      |
+|                                                                                                      |
+|                                                vv                                                    |
+|                                               v                                                      |
+|                                              v             v                                         |
+|                                     v        v            vv                                         |
+|                                    vv        v               vv                                      |
+|                                               v              vvv      v                              |
+|                                                vv            vv      vv                              |
+|                                                           vv                                         |
+|                                                            v                                         |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                     v                                |
+|                                                                    v       vv vv vv vv vv vv vv      |
+|                                                                   v        vv vv vv vv vv vv vv      |
+|                                                                  v                                   |
+|                                                                 v          vv vv vv vv vv vv vv      |
+|                                                                v           vv vv vv vv vv vv vv      |
+|                                                               v                                      |
+|                                                              v             vv vv vv vv vv vv vv      |
+|                                                             v              vv vv vv vv vv vv vv      |
+|                                                            v                        v                |
+|                                                           v                vv vv vv vv vv vv vv      |
+|                                                          v                 vv vv vv vv vv vv vv      |
+|                                                         v                                            |
+|                                                        v                   vv vv vv vv vv vv vv      |
+|                                                       v                    vv vv vv vv vv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                                   v                                                  |
+|                                                  v                                                   |
+|                                                 v                                                    |
+|                                                v                                                     |
+|                                               v                                                      |
+|                                          vvvvv                                                       |
+|                                          vvvvv                                                       |
+|                                          v  vv                                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 2:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                             v  v                                                     |
+|                                            vvvvvv                                                    |
+|                                            v    v                                                    |
+|                                           vv    vv                                                   |
+|                                            v    v                                                    |
+|                                             vvvv                                                     |
+|                                              vv                                                      |
+|               vv vv                                     v  v                                         |
+|                                                        vvvvvv                                        |
+|                v v                                     v    v                                        |
+|                v v                                    vv    vv                                       |
+|             vv v v vv                                  v    v                                        |
+|              vv   vv                                    vvvv                                         |
+|                                                          vv                                          |
+|                                                                                                      |
+|                                                         v  v                                         |
+|                           vv vv                        vvvvvv                                        |
+|                                                        v    v                                        |
+|                            v v                        vv    vv                                       |
+|                            v v                         v    v                                        |
+|                         vv v v vv                       vvvv                                         |
+|                          vv   vv                         vv                                          |
+|                                                                                                      |
+|                                                                                                      |
+|                                                v                                                     |
+|                                               vv                                                     |
+|                                              vv           vv                                         |
+|                                    vv       vvv           vvv                                        |
+|                                    vv        vv             vv v                                     |
+|                                               vv            v  v     vv                              |
+|                                                v            vv v     vv                              |
+|                                                           vvv                                        |
+|                                                           vv                                         |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                    v       vv vv vv vv vv vv vv      |
+|                                                                   v        vv vv vv vv vv vv vv      |
+|                                                                  v                                   |
+|                                                                 v          vv vv vv vv vv vv vv      |
+|                                                                v           vv vv vv vv vv vv vv      |
+|                                                               v                                      |
+|                                                              v             vv vv vv vv vv vv vv      |
+|                                                             v              vv vv vv    vv vv vv      |
+|                                                            v                                         |
+|                                                           v                vv vv vv    vv vv vv      |
+|                                                          v                 vv vv vv vv vv vv vv      |
+|                                                         v                                            |
+|                                                        v                   vv vv vv vv vv vv vv      |
+|                                                       v                    vv vv vv vv vv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                                   v                                                  |
+|                                                  v                                                   |
+|                                                 v                                                    |
+|                                                v                                                     |
+|                                           vvvvv                                                      |
+|                                          v    v                                                      |
+|                                         v     v                                                      |
+|                                          v   v                                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 3:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                            vv  vv                                                    |
+|                                            v vv v                                                    |
+|                                              vv                                                      |
+|                                           vvv  vvv                                                   |
+|                                           vv vv vv                                                   |
+|                                             v  v                                                     |
+|                                             v  v                                                     |
+|                                                        vv  vv                                        |
+|               vv vv                                    v vv v                                        |
+|                                                          vv                                          |
+|                v v                                    vvv  vvv                                       |
+|             vv v v vv                                 vv vv vv                                       |
+|             vvv   vvv                                   v  v                                         |
+|                                                         v  v                                         |
+|                                                          vv                                          |
+|                                                        vv  vv                                        |
+|                                                        v vv v                                        |
+|                           vv vv                          vv                                          |
+|                                                       vvv  vvv                                       |
+|                            v v                        vv vv vv                                       |
+|                         vv v v vv                       v  v                                         |
+|                         vvv   vvv                       v  v                                         |
+|                                                                                                      |
+|                                                                                                      |
+|                                               vv                                                     |
+|                                              v v                                                     |
+|                                             v             v v                                        |
+|                                    vv       v  v          v  v                                       |
+|                                    vv       v                vv                                      |
+|                                              v v           v   vv    vv                              |
+|                                               vv             vv      vv                              |
+|                                                           v  v                                       |
+|                                                           v v                                        |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                   v        vv vv vv vv vv vv vv      |
+|                                                                  v                                   |
+|                                                                 v          vv vv vv vv vv vv vv      |
+|                                                                v           vv vv vv vv vv vv vv      |
+|                                                               v                                      |
+|                                                              v             vv vv vvv  vvv vv vv      |
+|                                                             v              vv vv vvv  vvv vv vv      |
+|                                                            v                                         |
+|                                                           v                vv vv vvv  vvv vv vv      |
+|                                                          v                 vv vv vvv  vvv vv vv      |
+|                                                         v                                            |
+|                                                        v                   vv vv vv vv vv vv vv      |
+|                                                       v                    vv vv vv vv vv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                                   v                                                  |
+|                                                  v                                                   |
+|                                                 v                                                    |
+|                                            vvvvv                                                     |
+|                                           vvvvvv                                                     |
+|                                          vvvv vv                                                     |
+|                                         vv   vv                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 4:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                            vvvvvv                                                    |
+|                                            v    v                                                    |
+|                                           v      v                                                   |
+|                                           v      v                                                   |
+|                                           v  vv  v                                                   |
+|                                             v  v                                                     |
+|                                                                                                      |
+|                                                        vvvvvv                                        |
+|                                                        v    v                                        |
+|               vv vv                                   v      v                                       |
+|               v   v                                   v      v                                       |
+|             v  v v  v                                 v  vv  v                                       |
+|             v v   v v                                   v  v                                         |
+|              v     v                                    v  v                                         |
+|                                                        v vv v                                        |
+|                                                        v    v                                        |
+|                                                        v    v                                        |
+|                                                       v      v                                       |
+|                           vv vv                       v      v                                       |
+|                           v   v                       v  vv  v                                       |
+|                         v  v v  v                       v  v                                         |
+|                         v v   v v                                                                    |
+|                          v     v                                                                     |
+|                                                                                                      |
+|                                               vv                                                     |
+|                                              v v                                                     |
+|                                             vvv            v                                         |
+|                                    vv      vvv             vvvv                                      |
+|                                    vv       vvv             vvvv                                     |
+|                                              v v            v  v     vv                              |
+|                                               vv            vvvv     vv                              |
+|                                                            vvvv                                      |
+|                                                            v                                         |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                  v                                   |
+|                                                                 v          vv vv vv vv vv vv vv      |
+|                                                                v           vv vv vv vv vv vv vv      |
+|                                                               v                     vv               |
+|                                                              v             vv vv v v  v v vv vv      |
+|                                                             v              vv vv v v  v v vv vv      |
+|                                                            v                                         |
+|                                                           v                vv vv v v  v v vv vv      |
+|                                                          v                 vv vv v v  v v vv vv      |
+|                                                         v                           vv               |
+|                                                        v                   vv vv vv vv vv vv vv      |
+|                                                       v                    vv vv vv vv vv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                                   v                                                  |
+|                                                  v                                                   |
+|                                             vvvvv                                                    |
+|                                           v     v                                                    |
+|                                          v      v                                                    |
+|                                         v                                                            |
+|                                         vv vvvvv                                                     |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 5:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                             vvvv                                                     |
+|                                            vvvvvv                                                    |
+|                                           vv vv vv                                                   |
+|                                           vv    vv                                                   |
+|                                          vvv    vvv                                                  |
+|                                            v vv v                                                    |
+|                                              vv                                                      |
+|                                                         vvvv                                         |
+|                                                        vvvvvv                                        |
+|                                                       vv vv vv                                       |
+|               vv vv                                   vv    vv                                       |
+|              vv   vv                                 vvv    vvv                                      |
+|               vv vv                                    v vv v                                        |
+|             v v   v v                                  vv  vv                                        |
+|              v     v                                   vv  vv                                        |
+|                                                        v vv v                                        |
+|                                                       vv    vv                                       |
+|                                                       vv    vv                                       |
+|                                                       vv    vv                                       |
+|                           vv vv                      vvv    vvv                                      |
+|                          vv   vv                       v vv v                                        |
+|                           vv vv                          vv                                          |
+|                         v v   v v                                                                    |
+|                          v     v                                                                     |
+|                                                                                                      |
+|                                               vv                                                     |
+|                                             v  v                                                     |
+|                                            v               v v                                       |
+|                                    vv      v               v   v                                     |
+|                                    vv      v                   v                                     |
+|                                             v  v           v    v    vv                              |
+|                                               vv               v     vv                              |
+|                                                            v   v                                     |
+|                                                            v v                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                                                      |
+|                                                                 v          vv vv vv vv vv vv vv      |
+|                                                                v           vv vv vv    vv vv vv      |
+|                                                               v                  v      v            |
+|                                                              v             vv vv   v  v   vv vv      |
+|                                                             v              vv vv          vv vv      |
+|                                                            v                                         |
+|                                                           v                vv vv          vv vv      |
+|                                                          v                 vv vv   v  v   vv vv      |
+|                                                         v                        v      v            |
+|                                                        v                   vv vv vv    vv vv vv      |
+|                                                       v                    vv vv vv vv vv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                                   v                                                  |
+|                                              vvvvv                                                   |
+|                                              vvvvv                                                   |
+|                                              vv vv                                                   |
+|                                          v                                                           |
+|                                         v v vvvv                                                     |
+|                                         vv  vvv                                                      |
+|                                             vvv                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 6:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                              vv                                                      |
+|                                            v    v                                                    |
+|                                           v      v                                                   |
+|                                                                                                      |
+|                                                                                                      |
+|                                          v        v                                                  |
+|                                            v vv v                                                    |
+|                                             vvvv         vv                                          |
+|                                                        v    v                                        |
+|                                                       v      v                                       |
+|                                                                                                      |
+|              vvv vvv                                                                                 |
+|              v     v                                 v        v                                      |
+|                v v                                       vv                                          |
+|               vv vv                                   v      v                                       |
+|              v     v                                  v      v                                       |
+|                                                          vv                                          |
+|                                                                                                      |
+|                                                      v  v  v  v                                      |
+|                                                         v  v                                         |
+|                          vvv vvv                     v        v                                      |
+|                          v     v                       v vv v                                        |
+|                            v v                          vvvv                                         |
+|                           vv vv                                                                      |
+|                          v     v                                                                     |
+|                                                                                                      |
+|                                               vv                                                     |
+|                                               vv                                                     |
+|                                            vv               v                                        |
+|                                    vv     vvv               v v                                      |
+|                                    vv      vv                  vv                                    |
+|                                               vv               vv    vv                              |
+|                                               vv               vv    vv                              |
+|                                                             v v                                      |
+|                                                             v                                        |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                                                      |
+|                                                                            vv vv vvv  vvv vv vv      |
+|                                                                v           vv vv   v  v   vv vv      |
+|                                                               v                  v      v            |
+|                                                              v             vv vvv        vvv vv      |
+|                                                             v              vv vv          vv vv      |
+|                                                            v                                         |
+|                                                           v                vv vv          vv vv      |
+|                                                          v                 vv vvv        vvv vv      |
+|                                                         v                        v      v            |
+|                                                        v                   vv vv   v  v   vv vv      |
+|                                                       v                    vv vv vvv  vvv vv vv      |
+|                                                      v                                               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                    v                       vv vv vv vv vv vv vv      |
+|                                               vvvvv                                                  |
+|                                              v    v                                                  |
+|                                             v     v                                                  |
+|                                              v   v                                                   |
+|                                          v  v   v                                                    |
+|                                         v vvv  v                                                     |
+|                                         vv                                                           |
+|                                             v v                                                      |
+|                                              v                                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 7:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                             v  v                                                     |
+|                                              vv                                                      |
+|                                                                                                      |
+|               v   v                                                                                  |
+|              vv   vv                                                                                 |
+|              v v v v                                                                                 |
+|                v v                                                                                   |
+|               vv vv                                                                                  |
+|               v   v                                                                                  |
+|                                                                                                      |
+|                                                          vv                                          |
+|                                                                                                      |
+|                           v   v                                                                      |
+|                          vv   vv                        vvvv                                         |
+|                          v v v v                                                                     |
+|                            v v                          v  v                                         |
+|                           vv vv                          vv                                          |
+|                           v   v                                                                      |
+|                                                                                                      |
+|                                               vv                                                     |
+|                                              vvv                                                     |
+|                                           v vv               v                                       |
+|                                    vv     v  v               v v                                     |
+|                                    vv     v vv                v v                                    |
+|                                              vvv              v  v   vv                              |
+|                                               vv              v v    vv                              |
+|                                                              v v                                     |
+|                                                              v                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                                     vv               |
+|                                                                            vv vvv vv  vv vvv vv      |
+|                                                                            vv vv v v  v v vv vv      |
+|                                                               v                                      |
+|                                                              v             vv v v        v v vv      |
+|                                                             v              vv v v        v v vv      |
+|                                                            v                                         |
+|                                                           v                vv v v        v v vv      |
+|                                                          v                 vv v v        v v vv      |
+|                                                         v                                            |
+|                                                        v                   vv vv v v  v v vv vv      |
+|                                                       v                    vv vvv vv  vv vvv vv      |
+|                                                      v                              vv               |
+|                                                     v                      vv vv vv vv vv vv vv      |
+|                                                vvvvv                       vv vv vv vv vv vv vv      |
+|                                               vvvvvv                                                 |
+|                                              vvvv vv                                                 |
+|                                             vv   vv                                                  |
+|                                             vv   v                                                   |
+|                                          vv vv  v                                                    |
+|                                         v vvv                                                        |
+|                                         vvv vv                                                       |
+|                                              v                                                       |
+|                                              v                                                       |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 8:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                              vv                                                      |
+|                                              vv                                                      |
+|                                                                                                      |
+|              vv   vv                                                                                 |
+|              v v v v                                                                                 |
+|              v v v v                                                                                 |
+|                v v                                                                                   |
+|               vv vv                                                                                  |
+|               vv vv                                                                                  |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                          vv   vv                         vv                                          |
+|                          v v v v                         vv                                          |
+|                          v v v v                        v  v                                         |
+|                            v v                           vv                                          |
+|                           vv vv                          vv                                          |
+|                           vv vv                                                                      |
+|                                                                                                      |
+|                                              v v                                                     |
+|                                             v  v                                                     |
+|                                            vv                 v                                      |
+|                                    vv    vv   v              v v                                     |
+|                                    vv      vv                vv v                                    |
+|                                             v  v             vv vv   vv                              |
+|                                              v v             vv v    vv                              |
+|                                                              v v                                     |
+|                                                               v                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vv vv vv vv vv      |
+|                                                                            vv vv vv    vv vv vv      |
+|                                                                                                      |
+|                                                                            vv v vvvv  vvvv v vv      |
+|                                                                            vv v  v v  v v  v vv      |
+|                                                                               v v        v v         |
+|                                                              v             vv                vv      |
+|                                                             v              vv                vv      |
+|                                                            v                                         |
+|                                                           v                vv                vv      |
+|                                                          v                 vv                vv      |
+|                                                         v                     v v        v v         |
+|                                                        v                   vv v  v v  v v  v vv      |
+|                                                       v                    vv v vvvv  vvvv v vv      |
+|                                                      v                                               |
+|                                                 vvvvv                      vv vv vv    vv vv vv      |
+|                                               v     v                      vv vv vv vv vv vv vv      |
+|                                              v      v                                                |
+|                                             v                                                        |
+|                                                v   v                                                 |
+|                                               v vvv                                                  |
+|                                          vv                                                          |
+|                                         v                                                            |
+|                                         v v  v                                                       |
+|                                          v   vv                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 9:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                              vv                                                      |
+|                                              vv                                                      |
+|                                                                                                      |
+|              vv   vv                                                                                 |
+|             vv v v vv                                                                                |
+|                v v                                                                                   |
+|                v v                                                                                   |
+|                                                                                                      |
+|               vv vv                                                                                  |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                          vv   vv                         vv                                          |
+|                         vv v v vv                       v  v                                         |
+|                            v v                          v  v                                         |
+|                            v v                          v  v                                         |
+|                                                          vv                                          |
+|                           vv vv                                                                      |
+|                                                                                                      |
+|                                               v                                                      |
+|                                            vvvv                                                      |
+|                                           vvvv                v                                      |
+|                                    vv     v  v               v v                                     |
+|                                    vv     vvvv              v   vv                                   |
+|                                            vvvv             v   vv   vv                              |
+|                                               v             v   vv   vv                              |
+|                                                              v v                                     |
+|                                                               v                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                            vv vv vvv  vvv vv vv      |
+|                                                                            vv vv vvv  vvv vv vv      |
+|                                                                               v    v  v    v         |
+|                                                                            vv  vvv v  v vvv  vv      |
+|                                                                            vv v    v  v    v vv      |
+|                                                                                v          v          |
+|                                                                            vvv              vvv      |
+|                                                             v              vv                vv      |
+|                                                            v                                         |
+|                                                           v                vv                vv      |
+|                                                          v                 vvv              vvv      |
+|                                                         v                      v          v          |
+|                                                        v                   vv v    v  v    v vv      |
+|                                                       v                    vv  vvv v  v vvv  vv      |
+|                                                  vvvvv                        v    v  v    v         |
+|                                                  vvvvv                     vv vv vvv  vvv vv vv      |
+|                                                  vv vv                     vv vv vvv  vvv vv vv      |
+|                                              v                                                       |
+|                                                                                                      |
+|                                                vvvv                                                  |
+|                                                vvvv                                                  |
+|                                          v       v                                                   |
+|                                         v v                                                          |
+|                                         v    vv                                                      |
+|                                          v   vv                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+Generation 10:
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                              vv                                                      |
+|                                              vv                                                      |
+|                                                                                                      |
+|             vvv   vvv                                                                                |
+|             vv v v vv                                                                                |
+|                v v                                                                                   |
+|                                                                                                      |
+|               vv vv                                                                                  |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                         vvv   vvv                        vv                                          |
+|                         vv v v vv                       v  v                                         |
+|                            v v                         vvvvvv                                        |
+|                                                         v  v                                         |
+|                           vv vv                          vv                                          |
+|                                                                                                      |
+|                                                                                                      |
+|                                             v v                                                      |
+|                                           v   v                                                      |
+|                                           v                   v                                      |
+|                                    vv    v    v              vvvv                                    |
+|                                    vv     v                 vv v v                                   |
+|                                           v   v            vvv v  v  vv                              |
+|                                             v v             vv v v   vv                              |
+|                                                              vvvv                                    |
+|                                                               v                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                   v    v             |
+|                                                                            vv vv v v  v v vv vv      |
+|                                                                            vv    v  vv  v    vv      |
+|                                                                               v    vvvv    v         |
+|                                                                            vv vvv  vvvv  vvv vv      |
+|                                                                            vvvv   v    v   vvvv      |
+|                                                                               v            v         |
+|                                                                            v v              v v      |
+|                                                                            v v              v v      |
+|                                                            v                                         |
+|                                                           v                v v              v v      |
+|                                                          v                 v v              v v      |
+|                                                         v                     v            v         |
+|                                                        v                   vvvv   v    v   vvvv      |
+|                                                   vvvvv                    vv vvv  vvvv  vvv vv      |
+|                                                  v    v                       v    vvvv    v         |
+|                                                 v     v                    vv    v  vv  v    vv      |
+|                                                  v   v                     vv vv v v  v v vv vv      |
+|                                                                                   v    v             |
+|                                                 vv                                                   |
+|                                                v  v                                                  |
+|                                                v                                                     |
+|                                          v       vv                                                  |
+|                                         v                                                            |
+|                                         v    vv                                                      |
+|                                              vv                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
+|                                                                                                      |
